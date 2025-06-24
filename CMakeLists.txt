@@ -27,8 +27,22 @@ set(cpu_PARAMS
     # -mcpu, -mfloat, -mfloat-abi, ...
 )
 
+if( CMAKE_BUILD_TYPE STREQUAL "Debug" OR
+    CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"
+    )
+    add_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE BUILD_DEBUG)
+else()
+    message("Release")
+    add_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE BUILD_RELEASE)
+endif()
+
 # Sources
-set(sources_SRCS)
+set(sources_SRCS
+    Src/rtc.c
+    Src/gpio.c
+    Src/core.c
+    Src/servo.c
+    )
 
 # Include directories for all compilers
 set(include_DIRS
@@ -79,6 +93,8 @@ add_executable(${CMAKE_PROJECT_NAME})
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PUBLIC ${sources_SRCS})
+
+
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -148,3 +164,4 @@ add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${CMAKE_PROJECT_NAME}.hex
     COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${CMAKE_PROJECT_NAME}.bin
 )
+

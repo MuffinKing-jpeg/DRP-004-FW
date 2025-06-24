@@ -17,11 +17,22 @@
  */
 
 #include <stdint.h>
+#include "main.h"
+#include "gpio.h"
 
 int main(void)
 {
+    CORE_ClockInit();
+    CORE_PWRInit();
+    GPIO_ConfigALL();
+    RTC_Init();
+    GPIO_SetPin(GPIOB,GPIO_PIN8);
+    SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
+    SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 180);
+
     /* Loop forever */
-	for(;;){
-    
-    };
+    while (1)
+    {
+        CORE_EnterSTOP();
+    }
 }
