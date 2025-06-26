@@ -12,7 +12,9 @@ void RTC_Init(void)
     RCC->BDCR |= RCC_BDCR_RTCSEL_1;
 
     RTC->WPR = 0xCA;
+    CORE_TickDelay(100);
     RTC->WPR = 0x53;
+    CORE_TickDelay(100);
 
     RTC->CR &= ~RTC_CR_WUTE;
     RTC->ICSR = RTC_ICSR_INIT;

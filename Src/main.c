@@ -28,7 +28,8 @@ int main(void)
     RTC_Init();
     GPIO_SetPin(GPIOB,GPIO_PIN8);
     SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
-    SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 180);
+    SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 18000);
+    CORE_TickDelay(5);
 
     /* Loop forever */
     while (1)

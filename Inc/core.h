@@ -15,6 +15,8 @@ void CORE_ExitSTOP(void);
 void CORE_ClockInit(void);
 void CORE_PWRInit(void);
 
+void CORE_TickDelay(uint16_t ticks);
+
 #ifdef BUILD_DEBUG
 void CORE_AllowDebugInSTOP(void);
 #endif
