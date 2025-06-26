@@ -1,9 +1,11 @@
 #include "servo.h"
 
+uint8_t _SERVO_CalibrationOffset = 0;
+
 void SERVO_TIMConfig(TIM_TypeDef *tim, TIM_ChannelTypeDef channel)
 {
-    tim->PSC = 1;
-    tim->ARR = 20000 - 1;
+    tim->PSC = 0;
+    tim->ARR = 40000 - 1;
 
     for (uint8_t i = 0; i < 4; i++)
     {
@@ -31,9 +33,9 @@ void SERVO_TIMConfig(TIM_TypeDef *tim, TIM_ChannelTypeDef channel)
     }    
 }
 
-void SERVO_SetAngle(TIM_TypeDef *tim, TIM_ChannelTypeDef channel, uint8_t angle)
+void SERVO_SetAngle(TIM_TypeDef *tim, TIM_ChannelTypeDef channel, uint16_t angle)
 {
-    uint16_t mapped_angle = 1000 + ((angle * 1000) / 180);
+    uint16_t mapped_angle = (2500 + (((angle) * 2500) / 18000)) - _SERVO_CalibrationOffset; // Some mapping shenanigans. Numbers picked by experiment.
     volatile uint32_t* channels[] = {&tim->CCR1,&tim->CCR2,&tim->CCR3,&tim->CCR4};
 
     for (uint8_t i = 0; i < 4; i++)

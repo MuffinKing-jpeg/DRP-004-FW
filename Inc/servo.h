@@ -12,6 +12,6 @@ typedef enum
 }TIM_ChannelTypeDef;
 
 void SERVO_TIMConfig(TIM_TypeDef *tim, TIM_ChannelTypeDef channel);
-void SERVO_SetAngle(TIM_TypeDef *tim, TIM_ChannelTypeDef channel, uint8_t angle);
+void SERVO_SetAngle(TIM_TypeDef *tim, TIM_ChannelTypeDef channel, uint16_t angle);
 
 #endif
