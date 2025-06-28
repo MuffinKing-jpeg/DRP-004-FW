@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/Common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/cbtl08gp053" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/hx8347d" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/ina230" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/sn65dp141" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/ssd1315" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/st7735" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/stlm75" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/Components/tusb546" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/STM32G0316-DISCO" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/STM32G071B-Discovery" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/STM32G081B_EVAL" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/STM32G0C1E-EV" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/STM32G0xx_Nucleo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/BSP/STM32G0xx_Nucleo_32" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/CMSIS/Device/ST/STM32G0xx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Drivers/STM32CubeG0/Drivers/STM32G0xx_HAL_Driver" vcs="Git" />
+  </component>
+</project>
