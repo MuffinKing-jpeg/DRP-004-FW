@@ -46,6 +46,12 @@ typedef enum
     ADC_EXT_RISE_FALL,
 } ADC_ExtPolarity;
 
+#ifndef ADC_CHANNEL_QTY
+#define ADC_CHANNEL_QTY 3
+#endif
+
+extern uint16_t ADC_Data[ADC_CHANNEL_QTY];
+
 void ADC_RCC_Enable(void);
 void ADC_RCC_Disable(void);
 void ADC_Reset(void);
@@ -53,6 +59,9 @@ void ADC_SetChannel(ADC_ChannelTypeDef channel);
 void ADC_ResetChannel(ADC_ChannelTypeDef channel);
 void ADC_SetExternalTriggerSource(ADC_ExtTrigger source);
 void ADC_SetExternalTriggerPolarity(ADC_ExtPolarity polarity);
+void ADC_Calibration(void);
+void ADC_Start(void);
+void ADC_Enable(void);
 
 void ADC_MultiModeEnable(void);
 void ADC_EnableCircularDMA(void);

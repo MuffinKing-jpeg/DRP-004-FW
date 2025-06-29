@@ -21,16 +21,18 @@
 #include "gpio.h"
 #include "adc.h"
 #include "TIM/tim1.h"
+#include "ldr.h"
 
-TIM1_ConfigTypeDef TIM1_Config = {
-    .PSC = 0,
-    .ARR = 40000,
-    .CCR1 = 0,
-    .CCR2 = 0,
-    .CCR3 = 0,
-    .CCR4 = 0,
-    .CCR5 = 1000,
-    .CCR6 = 1000,
+#ifdef ADC_CHANNEL_QTY
+#undef ADC_CHANNEL_QTY
+#define ADC_CHANNEL_QTY 1
+#endif
+
+LDR_ConfigTypeDef LDR_Config = {
+    .TIM_ARR = 40000,
+    .TIM_PSC = 0,
+    .DMA_Channel = DMA1_Channel1,
+    .ADC_Channel = ADC_CHANNEL_15,
 };
 
 int main(void)
@@ -43,19 +45,17 @@ int main(void)
     GPIO_SetPin(GPIOA, GPIO_PIN12);
     SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
     SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 18000);
-    ADC_RCC_Enable();
-    ADC_SetExternalTriggerPolarity(ADC_EXT_FALL);
-    ADC_SetExternalTriggerSource(ADC_TRG2);
-    ADC_SetChannel(ADC_CHANNEL_15);
-    TIM1_Enable();
-    TIM1_Init(&TIM1_Config);
-    TIM1_EnableChannel(TIM1_CHANNEL_5);
-    TIM1_TRGO2_Config(OC5REFC);
-    TIM1_Start();
+    LDR_Init(&LDR_Config);
+    LDR_Start(&LDR_Config);
 
     /* Loop forever */
     while (1)
     {
         CORE_EnterSTOP();
     }
+}
+
+void DMA1_Channel1_IRQHandler(void)
+{
+    LDR_Handler(&LDR_Config);
 }

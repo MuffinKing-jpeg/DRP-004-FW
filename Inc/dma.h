@@ -6,9 +6,9 @@
 typedef enum
 {
     MEMORY_TO_MEMORY,
-    MEMORY_TO_PERIPHERAL,
-    PERIPHERAL_TO_MEMORY,
-    PERIPHERAL_TO_PERIPHERAL,
+    MEMORY_TO_PERIPHERY,
+    PERIPHERY_TO_MEMORY,
+    PERIPHERY_TO_PERIPHERY,
 }DMA_DirectionTypeDef;
 
 typedef enum
@@ -21,17 +21,17 @@ typedef enum
 typedef enum
 {
     DMA_INCREMENT_MEMORY,
-    DMA_INCREMENT_PERIPHERAL,
+    DMA_INCREMENT_PERIPHERY,
     DMA_INCREMENT_DISABLE,
 }DMA_IncrementTypeDef;
 
 void DMA_Init(DMA_Channel_TypeDef* DMA_Channel);
 
 void DMA_SetDirection(DMA_Channel_TypeDef* DMA_Channel, DMA_DirectionTypeDef DMA_Direction);
-void DMA_SetPeripheralBaseAddr(DMA_Channel_TypeDef* DMA_Channel, uint32_t Address);
-void DMA_SetMemoryBaseAddr(DMA_Channel_TypeDef* DMA_Channel, uint32_t Address);
+void DMA_SetPeripheryBaseAddr(DMA_Channel_TypeDef* DMA_Channel, const uint32_t* Address);
+void DMA_SetMemoryBaseAddr(DMA_Channel_TypeDef* DMA_Channel, const uint32_t* Address);
 void DMA_SetArraySize(DMA_Channel_TypeDef* DMA_Channel, uint32_t Size);
-void DMA_SetPeripheralSize(DMA_Channel_TypeDef* DMA_Channel, DMA_DataSizeTypeDef Size);
+void DMA_SetPeripherySize(DMA_Channel_TypeDef* DMA_Channel, DMA_DataSizeTypeDef Size);
 void DMA_SetMemorySize(DMA_Channel_TypeDef* DMA_Channel, DMA_DataSizeTypeDef Size);
 void DMA_SetIncrementType(DMA_Channel_TypeDef* DMA_Channel, DMA_IncrementTypeDef Increment);
 

@@ -1,10 +1,5 @@
 #include "tim1.h"
 
-void TIM1_ApplySettings(void)
-{
-
-}
-
 void TIM1_Enable(void)
 {
     RCC->APBENR2 |= RCC_APBENR2_TIM1EN;

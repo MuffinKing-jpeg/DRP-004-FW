@@ -1,9 +1,13 @@
 #include "adc.h"
 #include "core.h"
 
+uint16_t ADC_Data[ADC_CHANNEL_QTY] = {0};
+
 void ADC_RCC_Enable(void){
     RCC->APBENR2 |= RCC_APBENR2_ADCEN;
     RCC->APBSMENR2 |= RCC_APBSMENR2_ADCSMEN;
+    ADC1->CR |= ADC_CR_ADVREGEN;
+    CORE_TickDelay(1000);
 }
 
 void ADC_RCC_Disable(void){
@@ -33,6 +37,23 @@ void ADC_SetExternalTriggerSource(ADC_ExtTrigger source)
     ADC1->CFGR1 |= (source << ADC_CFGR1_EXTSEL_Pos);
 }
 
+void ADC_Calibration(void)
+{
+    ADC1->CR |= ADC_CR_ADCAL;
+    while (ADC1->CR & ADC_CR_ADCAL);
+}
+
+void ADC_Enable(void)
+{
+    ADC1->CR |= ADC_CR_ADEN;
+    while (!(ADC1->ISR & ADC_ISR_ADRDY));
+}
+
+void ADC_Start(void)
+{
+    ADC1->CR |= ADC_CR_ADSTART;
+}
+
 void ADC_SetExternalTriggerPolarity(ADC_ExtPolarity polarity)
 {
     ADC1->CFGR1 &= ~ADC_CFGR1_EXTEN;
@@ -47,5 +68,6 @@ void ADC_MultiModeEnable(void)
 
 void ADC_EnableCircularDMA(void)
 {
+    ADC1->CFGR1 |= ADC_CFGR1_DMAEN;
     ADC1->CFGR1 |= ADC_CFGR1_DMACFG;
 }
