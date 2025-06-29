@@ -42,11 +42,15 @@ set(sources_SRCS
     Src/gpio.c
     Src/core.c
     Src/servo.c
+    Src/adc.c
+    Src/dma.c
+    Src/TIM/tim1.c
     )
 
 # Include directories for all compilers
 set(include_DIRS
 "${CMAKE_CURRENT_SOURCE_DIR}/Inc"
+"${CMAKE_CURRENT_SOURCE_DIR}/Inc/TIM"
 )
 
 # Include directories for each compiler

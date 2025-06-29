@@ -19,6 +19,19 @@
 #include <stdint.h>
 #include "main.h"
 #include "gpio.h"
+#include "adc.h"
+#include "TIM/tim1.h"
+
+TIM1_ConfigTypeDef TIM1_Config = {
+    .PSC = 0,
+    .ARR = 40000,
+    .CCR1 = 0,
+    .CCR2 = 0,
+    .CCR3 = 0,
+    .CCR4 = 0,
+    .CCR5 = 1000,
+    .CCR6 = 1000,
+};
 
 int main(void)
 {
@@ -26,10 +39,19 @@ int main(void)
     CORE_PWRInit();
     GPIO_ConfigALL();
     RTC_Init();
-    GPIO_SetPin(GPIOB,GPIO_PIN8);
+    GPIO_SetPin(GPIOB, GPIO_PIN8);
+    GPIO_SetPin(GPIOA, GPIO_PIN12);
     SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
     SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 18000);
-    CORE_TickDelay(5);
+    ADC_RCC_Enable();
+    ADC_SetExternalTriggerPolarity(ADC_EXT_FALL);
+    ADC_SetExternalTriggerSource(ADC_TRG2);
+    ADC_SetChannel(ADC_CHANNEL_15);
+    TIM1_Enable();
+    TIM1_Init(&TIM1_Config);
+    TIM1_EnableChannel(TIM1_CHANNEL_5);
+    TIM1_TRGO2_Config(OC5REFC);
+    TIM1_Start();
 
     /* Loop forever */
     while (1)
