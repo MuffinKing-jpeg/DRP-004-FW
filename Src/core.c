@@ -1,6 +1,5 @@
 #include "stm32g0xx.h"
 #include "core.h"
-#include "servo.h"
 
 
 void CORE_PWRInit(void)
@@ -27,9 +26,8 @@ void CORE_ClockInit(void)
 
 void CORE_EnterSTOP(void)
 {
-    // Slow down to 2MHz and keep APB 2MHz
-    RCC->CR |= (3UL << RCC_CR_HSIDIV_Pos);      
-    RCC->CFGR &= ~RCC_CFGR_PPRE;
+    RCC->CR |= (3UL << RCC_CR_HSIDIV_Pos);      // Slow down to 2MHz
+    RCC->CFGR &= ~RCC_CFGR_PPRE;                // Keep APB at 2MHz
 
     PWR->CR1 |= PWR_CR1_LPR;                    // Enable LP regulator
     PWR->CR1 &= ~PWR_CR1_LPMS;
@@ -42,14 +40,12 @@ void CORE_ExitSTOP(void)
     PWR->CR1 &= ~PWR_CR1_LPR;                   // Disable LP regulator
     CORE_TickDelay(100);
     RCC->CR &= ~RCC_CR_HSIDIV;                  // Speed-up to 16MHz
-    RCC->CFGR |= RCC_CFGR_PPRE;                 // Keep APB at 2MHz
+    RCC->CFGR |= RCC_CFGR_PPRE;
 }
 
 void CORE_TickDelay(uint16_t ticks)
 {
-    for (uint16_t i = ticks; i > 0; i--); // YOLO, LOL
-    
-    
+    for (uint16_t i = ticks; i > 0; i--);       // YOLO, LOL
 }
 
 #ifdef BUILD_DEBUG

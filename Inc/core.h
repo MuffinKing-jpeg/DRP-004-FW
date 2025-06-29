@@ -1,6 +1,8 @@
 #ifndef __CORE_H
 #define __CORE_H
 
+#include "stm32g0xx.h"
+
 #define CORE_RTC_SLEEP_PERIOD (100-1)
 
 typedef enum{
