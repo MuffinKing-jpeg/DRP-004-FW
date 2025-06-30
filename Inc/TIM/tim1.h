@@ -15,16 +15,35 @@ typedef struct
     uint16_t CCR6;
 } TIM1_ConfigTypeDef;
 
-typedef enum
-{
-    TRGO2_RESET = 0x00, // 0b0000
-    OC1REFC = 0x04, // 0b0100
-    OC2REFC = 0x05, // 0b0101
-    OC3REFC = 0x06, // 0b0110
-    OC4REFC = 0x07, // 0b0111
-    OC5REFC = 0x08, // 0b1000
-    OC6REFC = 0x09, // 0b1001
+// typedef enum
+// {
+//     TRGO2_RESET = 0x00, // 0b0000
+//     OC1REFC = 0x04, // 0b0100
+//     OC2REFC = 0x05, // 0b0101
+//     OC3REFC = 0x06, // 0b0110
+//     OC4REFC = 0x07, // 0b0111
+//     OC5REFC = 0x08, // 0b1000
+//     OC6REFC = 0x09, // 0b1001
+// } TIM1_TRGO2_Source;
+typedef enum {
+    TIM_MMS2_RESET                = 0x0,  // 0000: UG bit from TIMx_EGR is used as trigger output (TRGO2)
+    TIM_MMS2_ENABLE               = 0x1,  // 0001: Counter Enable signal CNT_EN is used as trigger output (TRGO2)
+    TIM_MMS2_UPDATE               = 0x2,  // 0010: Update event is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_PULSE        = 0x3,  // 0011: Compare pulse (CC1IF flag) is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_OC1REFC      = 0x4,  // 0100: OC1REFC signal is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_OC2REFC      = 0x5,  // 0101: OC2REFC signal is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_OC3REFC      = 0x6,  // 0110: OC3REFC signal is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_OC4REFC      = 0x7,  // 0111: OC4REFC signal is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_OC5REFC      = 0x8,  // 1000: OC5REFC signal is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_OC6REFC      = 0x9,  // 1001: OC6REFC signal is used as trigger output (TRGO2)
+    TIM_MMS2_COMPARE_PULSE_OC4F_OC6F = 0xA, // 1010: OC4REFC rising or OC6REFC rising/falling edges generate pulses on TRGO2
+    TIM_MMS2_COMPARE_PULSE_OC6F      = 0xB, // 1011: OC6REFC rising or falling edges generate pulses on TRGO2
+    TIM_MMS2_COMPARE_PULSE_OC4F_OC6R = 0xC, // 1100: OC4REFC or OC6REFC rising edges generate pulses on TRGO2
+    TIM_MMS2_COMPARE_PULSE_OC4F_OC6F2= 0xD, // 1101: OC4REFC rising or OC6REFC falling edges generate pulses on TRGO2
+    TIM_MMS2_COMPARE_PULSE_OC5F_OC6R = 0xE, // 1110: OC5REFC or OC6REFC rising edges generate pulses on TRGO2
+    TIM_MMS2_COMPARE_PULSE_OC5F_OC6F = 0xF  // 1111: OC5REFC rising or OC6REFC falling edges generate pulses on TRGO2
 } TIM1_TRGO2_Source;
+
 
 typedef enum
 {

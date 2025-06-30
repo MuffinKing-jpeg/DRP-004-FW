@@ -17,13 +17,13 @@ void LDR_Init(const LDR_ConfigTypeDef* LDR_Config)
     TIM1_Enable();
     DMA_Init(LDR_Config->DMA_Channel);
     ADC_Calibration();
-    ADC_SetExternalTriggerPolarity(ADC_EXT_FALL);
-    ADC_SetExternalTriggerSource(ADC_TRG2);
+    ADC_SetExternalTriggerPolarity(ADC_EXT_RISE);
+    ADC_SetExternalTriggerSource(ADC_TRG0);
     ADC_SetChannel(LDR_Config->ADC_Channel);
     ADC_EnableCircularDMA();
     TIM1_Init(&TIM1_Config);
     TIM1_EnableChannel(TIM1_CHANNEL_5);
-    TIM1_TRGO2_Config(OC5REFC);
+    TIM1_TRGO2_Config(TIM_MMS2_UPDATE);
     DMA_SetPeripherySize(LDR_Config->DMA_Channel, DMA_SIZE_16);
     DMA_SetMemorySize(LDR_Config->DMA_Channel, DMA_SIZE_16);
     DMA_EnableCircularMode(LDR_Config->DMA_Channel);
