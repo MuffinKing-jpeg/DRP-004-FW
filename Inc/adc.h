@@ -47,7 +47,7 @@ typedef enum
 } ADC_ExtPolarity;
 
 #ifndef ADC_CHANNEL_QTY
-#define ADC_CHANNEL_QTY 3
+#define ADC_CHANNEL_QTY 1
 #endif
 
 extern uint16_t ADC_Data[ADC_CHANNEL_QTY];
@@ -65,5 +65,6 @@ void ADC_Enable(void);
 
 void ADC_MultiModeEnable(void);
 void ADC_EnableCircularDMA(void);
+void ADC_EnableSingleShotDMA(void);
 
 #endif
