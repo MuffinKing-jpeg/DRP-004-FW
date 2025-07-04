@@ -21,7 +21,7 @@ Or clone this repo with `--recursive` flag
 
 ### J-Link
 
-- Target remote: `tcp::50000`
+ - Target remote: `tcp::2331`
 - GDB server: `<PATH_TO_JLINK_SW>/JLinkGDBServer`
 - GDB server args: `-USB 0 -device STM32G031G6 -endian little -if SWD -speed 8000 -noir -LocalhostOnly -nologtofile -port 2331 -SWOPort 2332 -TelnetPort 2333`
 
