@@ -48,9 +48,15 @@ void CORE_TickDelay(uint16_t ticks)
     for (uint16_t i = ticks; i > 0; i--);       // YOLO, LOL
 }
 
+void CORE_SetPA12Remap(void)
+{
+    SYSCFG->CFGR2 |= SYSCFG_CFGR1_PA12_RMP;
+}
+
 #ifdef BUILD_DEBUG
 void CORE_AllowDebugInSTOP(void)
 {
     DBG->CR |= DBG_CR_DBG_STOP;
 }
+
 #endif

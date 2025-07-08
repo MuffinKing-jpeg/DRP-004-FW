@@ -6,11 +6,13 @@ TIM1_ConfigTypeDef TIM1_Config = {
     .ARR = 0xFFFF,
     .CCR1 = 0,
     .CCR2 = 0,
-    .CCR3 = 0,
+    .CCR3 = 0xFFFF - 100,
     .CCR4 = 0,
-    .CCR5 = 1000,
-    .CCR6 = 1000,
+    .CCR5 = 0,
+    .CCR6 = 0,
 };
+
+
 
 void LDR_Init(const LDR_ConfigTypeDef* LDR_Config)
 {
@@ -21,7 +23,7 @@ void LDR_Init(const LDR_ConfigTypeDef* LDR_Config)
     ADC_SetExternalTriggerPolarity(ADC_EXT_RISE);
     ADC_SetExternalTriggerSource(ADC_TRG0);
     ADC_SetChannel(LDR_Config->ADC_Channel);
-    ADC_EnableSingleShotDMA();
+    ADC_EnableCircularDMA();
     TIM1_Init(&TIM1_Config);
     TIM1_EnableChannel(TIM1_CHANNEL_5);
     TIM1_TRGO2_Config(TIM_MMS2_UPDATE);
@@ -35,9 +37,22 @@ void LDR_Init(const LDR_ConfigTypeDef* LDR_Config)
     DMA_EnableCircularMode(LDR_Config->DMA_Channel);
     DMAMUX_Enable();
     DMAMUX_SetReqID(DMAMUX1_Channel0, DMAMUX_ADC);
+
+    CORE_SetPA12Remap();
+
+    // Config LDR_EN (PA10) pin
+    GPIO_SelectOpMode(GPIOA, GPIO_PIN10, GPIO_OP_MODE_PUSHPULL);
+    GPIO_SelectMode(GPIOA, GPIO_PIN10, GPIO_AF2);
+    GPIO_SetPullDown(GPIO_PORT_A,GPIO_PIN10);
+
+    TIM1_EnableChannel(TIM1_CHANNEL_3);
+
 }
 void LDR_Start(const LDR_ConfigTypeDef* LDR_Config)
 {
+#ifdef BUILD_DEBUG
+    DBG->APBFZ2 |= DBG_APB_FZ2_DBG_TIM1_STOP;
+#endif
     ADC_Start();
     DMA_EnableInterrupt(LDR_Config->DMA_Channel, DMA1_Channel1_IRQn);
     DMA_Enable(LDR_Config->DMA_Channel);

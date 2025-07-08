@@ -64,6 +64,28 @@ void TIM1_EnableChannel(TIM1_CHANNEL channel)
     }
 }
 
+void TIM1_EnableChannelOutput(TIM1_CHANNEL channel)
+{
+    switch (channel)
+    {
+    case TIM1_CHANNEL_1:
+        TIM1->CCMR1 &= ~TIM_CCMR1_CC1S;
+        break;
+    case TIM1_CHANNEL_2:
+        TIM1->CCMR1 &= ~TIM_CCMR1_CC2S;
+        break;
+    case TIM1_CHANNEL_3:
+        TIM1->CCMR2 &= ~TIM_CCMR2_CC3S;
+        break;
+    case TIM1_CHANNEL_4:
+        TIM1->CCMR2 &= ~TIM_CCMR2_CC4S;
+        break;
+    case TIM1_CHANNEL_5:
+    case TIM1_CHANNEL_6:
+        break;
+    }
+}
+
 void TIM1_DisableChannel(TIM1_CHANNEL channel)
 {
     switch (channel)
