@@ -3,6 +3,7 @@
 
 #include "stm32g0xx.h"
 #include "adc.h"
+#include "dmamux.h"
 #include "gpio.h"
 #include "dma.h"
 #include "TIM/tim1.h"

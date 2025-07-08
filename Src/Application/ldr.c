@@ -1,5 +1,6 @@
 #include "ldr.h"
 
+
 TIM1_ConfigTypeDef TIM1_Config = {
     .PSC = 0,
     .ARR = 0xFFFF,
@@ -28,9 +29,12 @@ void LDR_Init(const LDR_ConfigTypeDef* LDR_Config)
     DMA_SetMemorySize(LDR_Config->DMA_Channel, DMA_SIZE_16);
     DMA_SetDirection(LDR_Config->DMA_Channel,PERIPHERY_TO_MEMORY);
     DMA_SetArraySize(LDR_Config->DMA_Channel, ADC_CHANNEL_QTY);
-    DMA_SetPeripheryBaseAddr(LDR_Config->DMA_Channel, (uint32_t)&ADC1->DR);
+    DMA_SetPeripheryBaseAddr(LDR_Config->DMA_Channel, (uint32_t*)&ADC1->DR);
     DMA_SetMemoryBaseAddr(LDR_Config->DMA_Channel, ADC_Data);
     DMA_SetIncrementType(LDR_Config->DMA_Channel,DMA_INCREMENT_MEMORY);
+    DMA_EnableCircularMode(LDR_Config->DMA_Channel);
+    DMAMUX_Enable();
+    DMAMUX_SetReqID(DMAMUX1_Channel0, DMAMUX_ADC);
 }
 void LDR_Start(const LDR_ConfigTypeDef* LDR_Config)
 {

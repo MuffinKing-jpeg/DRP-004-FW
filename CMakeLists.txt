@@ -44,6 +44,7 @@ set(sources_SRCS
         Src/servo.c
         Src/adc.c
         Src/dma.c
+        Src/dmamux.c
         Src/TIM/tim1.c
         Src/Application/ldr.c
 )
