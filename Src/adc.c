@@ -74,6 +74,6 @@ void ADC_EnableCircularDMA(void)
 
 void ADC_EnableSingleShotDMA(void)
 {
-    ADC1->CFGR1 &= ~ADC_CFGR1_DMAEN;
-    ADC1->CFGR1 |= ADC_CFGR1_DMACFG;
+    ADC1->CFGR1 &= ~ADC_CFGR1_DMACFG;
+    ADC1->CFGR1 |= ADC_CFGR1_DMAEN;
 }
