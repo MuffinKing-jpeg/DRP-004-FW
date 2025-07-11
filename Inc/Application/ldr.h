@@ -2,9 +2,9 @@
 #define __LDR_H
 
 #include "stm32g0xx.h"
-#include "adc.h"
-#include "dmamux.h"
-#include "gpio.h"
+#include "../platform/adc.h"
+#include "../platform/dmamux.h"
+#include "../platform/gpio.h"
 #include "dma.h"
 #include "TIM/tim1.h"
 

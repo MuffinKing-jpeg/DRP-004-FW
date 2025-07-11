@@ -1,5 +1,5 @@
-#include "adc.h"
-#include "core.h"
+#include "../../Inc/platform/adc.h"
+#include "../../Inc/platform/core.h"
 
 uint16_t ADC_Data[ADC_CHANNEL_QTY] = {0};
 

@@ -38,21 +38,21 @@ endif ()
 
 # Sources
 set(sources_SRCS
-        Src/rtc.c
-        Src/gpio.c
-        Src/core.c
-        Src/servo.c
-        Src/adc.c
-        Src/dma.c
-        Src/dmamux.c
-        Src/TIM/tim1.c
+        Src/platform/rtc.c
+        Src/platform/gpio.c
+        Src/platform/core.c
+        Src/platform/servo.c
+        Src/platform/adc.c
+        Src/platform/dma.c
+        Src/platform/dmamux.c
+        Src/platform/TIM/tim1.c
         Src/Application/ldr.c
 )
 
 # Include directories for all compilers
 set(include_DIRS
         "${CMAKE_CURRENT_SOURCE_DIR}/Inc"
-        "${CMAKE_CURRENT_SOURCE_DIR}/Inc/TIM"
+        "Inc/platform/TIM"
         "${CMAKE_CURRENT_SOURCE_DIR}/Inc/Application"
 )
 

@@ -17,9 +17,9 @@
  */
 
 #include <stdint.h>
-#include "main.h"
-#include "gpio.h"
-#include "adc.h"
+#include "../Inc/main.h"
+#include "../Inc/platform/gpio.h"
+#include "../Inc/platform/adc.h"
 #include "TIM/tim1.h"
 #include "ldr.h"
 

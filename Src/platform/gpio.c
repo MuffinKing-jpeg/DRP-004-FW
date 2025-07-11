@@ -1,4 +1,4 @@
-#include "gpio.h"
+#include "../../Inc/platform/gpio.h"
 
 volatile uint32_t* const PWR_PDCR_MAP[5] = {
     &(PWR->PDCRA),  // PORT_A - PWR->PDCRA

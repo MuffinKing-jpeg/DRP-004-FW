@@ -1,4 +1,4 @@
-#include "rtc.h"
+#include "../../Inc/platform/rtc.h"
 #include "gpio.h"
 #define LED_DURATION 100
 

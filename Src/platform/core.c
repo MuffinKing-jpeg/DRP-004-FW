@@ -1,5 +1,5 @@
 #include "stm32g0xx.h"
-#include "core.h"
+#include "../../Inc/platform/core.h"
 
 
 void CORE_PWRInit(void)
