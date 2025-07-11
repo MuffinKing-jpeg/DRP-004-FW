@@ -52,7 +52,8 @@ set(sources_SRCS
 # Include directories for all compilers
 set(include_DIRS
         "${CMAKE_CURRENT_SOURCE_DIR}/Inc"
-        "Inc/platform/TIM"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Inc/platform"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Inc/platform/TIM"
         "${CMAKE_CURRENT_SOURCE_DIR}/Inc/Application"
 )
 
@@ -96,8 +97,7 @@ include("cmake/vscode_generated.cmake")
 link_directories(${CMAKE_PROJECT_NAME} ${link_DIRS})
 
 # Create an executable object type
-add_executable(${CMAKE_PROJECT_NAME}
-        Src/Application/ldr.c)
+add_executable(${CMAKE_PROJECT_NAME})
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PUBLIC ${sources_SRCS})

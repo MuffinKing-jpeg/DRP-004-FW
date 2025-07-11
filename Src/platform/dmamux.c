@@ -1,4 +1,4 @@
-#include "../Inc/dmamux.h"
+#include "dmamux.h"
 
 void DMAMUX_Enable()
 {
