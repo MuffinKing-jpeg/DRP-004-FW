@@ -4,15 +4,15 @@
 #include "gpio.h"
 #include "adc.h"
 
-#ifdef ADC_CHANNEL_QTY
-#undef ADC_CHANNEL_QTY
+#ifdef BOARD_ADC_CHANNEL_QTY
+#undef BOARD_ADC_CHANNEL_QTY
 #endif
-#define ADC_CHANNEL_QTY 2
+#define BOARD_ADC_CHANNEL_QTY 2
 
-#define ADC_BATT    ADC_CHANNEL_4
-#define ADC_LDR     ADC_CHANNEL_15
+#define BOARD_ADC_BATT    ADC_CHANNEL_4
+#define BOARD_ADC_LDR     ADC_CHANNEL_15
 
-#define ADC_CHANNEL_LIST (ADC_BATT | ADC_LDR)
+#define BOARD_ADC_CHANNEL_LIST (BOARD_ADC_BATT | BOARD_ADC_LDR)
 
 typedef struct
 {

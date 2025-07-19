@@ -2,9 +2,10 @@
 #define __ADC_H
 
 #include "stm32g0xx.h"
+#include "board.h"
 
-#ifndef ADC_CHANNEL_QTY
-#define ADC_CHANNEL_QTY 1
+#ifndef BOARD_ADC_CHANNEL_QTY
+#define BOARD_ADC_CHANNEL_QTY 1
 #endif
 
 typedef enum
@@ -51,7 +52,7 @@ typedef enum
 } ADC_ExtPolarity;
 
 
-extern uint16_t ADC_Data[ADC_CHANNEL_QTY];
+extern uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY];
 
 void ADC_RCC_Enable(void);
 void ADC_RCC_Disable(void);

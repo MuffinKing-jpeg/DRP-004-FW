@@ -23,16 +23,16 @@ const BOARD_GpioConfTypeDef BOARD_Servo_EN = {
 const BOARD_GpioConfTypeDef BOARD_LDR_ADC = {
     .gpioPin = GPIO_PIN11,
     .gpioPort = GPIO_PORT_A,
-    .gpioOpMode = GPIO_OP_MODE_OPENDRAIN,
+    .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_RST,
     .gpioAF = GPIO_AF_NONE,
     .gpioPull = GPIO_PULL_NONE,
 };
 
 const BOARD_GpioConfTypeDef BOARD_LDR_EN = {
-    .gpioPin = GPIO_PIN10,
+    .gpioPin = GPIO_PIN12,
     .gpioPort = GPIO_PORT_A,
-    .gpioOpMode = GPIO_OP_MODE_OPENDRAIN,
+    .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_OUTPUT,
     .gpioAF = GPIO_AF_NONE,
     .gpioPull = GPIO_PULL_DOWN,
@@ -50,7 +50,7 @@ const BOARD_GpioConfTypeDef BOARD_BAT_load = {
 const BOARD_GpioConfTypeDef BOARD_BAT_ADC = {
     .gpioPin = GPIO_PIN4,
     .gpioPort = GPIO_PORT_A,
-    .gpioOpMode = GPIO_OP_MODE_OPENDRAIN,
+    .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_RST,
     .gpioAF = GPIO_AF_NONE,
     .gpioPull = GPIO_PULL_NONE,
@@ -146,4 +146,6 @@ void BOARD_Init(void)
             }
         }
     }
+
+    GPIO_ApplyPull();
 }

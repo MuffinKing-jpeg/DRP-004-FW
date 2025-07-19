@@ -26,7 +26,7 @@
 #include "ldr.h"
 
 LDR_ConfigTypeDef LDR_Config = {
-    .TIM_ARR = 40000,
+    .TIM_ARR = 0xFFFF,
     .TIM_PSC = 0,
     .DMA_Channel = DMA1_Channel1,
     .ADC_Channel = ADC_CHANNEL_15,
@@ -39,7 +39,8 @@ int main(void)
     BOARD_Init();
     RTC_Init();
     GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
-    // GPIO_SetPin(GPIOA, GPIO_PIN12);
+    GPIO_SetPin(BOARD_LDR_EN.gpioPort, BOARD_LDR_EN.gpioPin);
+    GPIO_SetPin(BOARD_BAT_load.gpioPort, BOARD_BAT_load.gpioPin);
     SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
     SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 18000);
     LDR_Init(&LDR_Config);

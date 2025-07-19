@@ -22,15 +22,16 @@ void LDR_Init(const LDR_ConfigTypeDef* LDR_Config)
     ADC_Calibration();
     ADC_SetExternalTriggerPolarity(ADC_EXT_RISE);
     ADC_SetExternalTriggerSource(ADC_TRG0);
-    ADC_SetChannel(LDR_Config->ADC_Channel | ADC_CHANNEL_4);
+    ADC_SetChannel(BOARD_ADC_CHANNEL_LIST);
     ADC_EnableCircularDMA();
+    ADC1->CFGR1 |= ADC_CFGR1_WAIT; // BRUH. just for quick prototyping. Move to driver ASAP.
     TIM1_Init(&TIM1_Config);
     TIM1_EnableChannel(TIM1_CHANNEL_5);
     TIM1_TRGO2_Config(TIM_MMS2_UPDATE);
     DMA_SetPeripherySize(LDR_Config->DMA_Channel, DMA_SIZE_16);
     DMA_SetMemorySize(LDR_Config->DMA_Channel, DMA_SIZE_16);
     DMA_SetDirection(LDR_Config->DMA_Channel,PERIPHERY_TO_MEMORY);
-    DMA_SetArraySize(LDR_Config->DMA_Channel, ADC_CHANNEL_QTY);
+    DMA_SetArraySize(LDR_Config->DMA_Channel, BOARD_ADC_CHANNEL_QTY);
     DMA_SetPeripheryBaseAddr(LDR_Config->DMA_Channel, (uint32_t*)&ADC1->DR);
     DMA_SetMemoryBaseAddr(LDR_Config->DMA_Channel, ADC_Data);
     DMA_SetIncrementType(LDR_Config->DMA_Channel,DMA_INCREMENT_MEMORY);

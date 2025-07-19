@@ -1,7 +1,7 @@
 #include "../../Inc/platform/adc.h"
 #include "../../Inc/platform/core.h"
 
-uint16_t ADC_Data[ADC_CHANNEL_QTY] = {0};
+uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY] = {0};
 
 void ADC_RCC_Enable(void){
     RCC->APBENR2 |= RCC_APBENR2_ADCEN;
