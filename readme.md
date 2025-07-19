@@ -11,6 +11,19 @@ git submodule update --init --recursive
 ```
 Or clone this repo with `--recursive` flag
 
+## Issues to overcome
+
+### Hardware
+
+ [Hardware repository](https://github.com/MuffinKing-jpeg/DRP.004/tree/main)
+
+### Software
+
+- Move drivers to submodule
+- Write docs
+- Unit tests
+- Sync control MOSFETs to adc trigger (require new HW)
+
 ## CLion configuration
 
 ### ST-Link
