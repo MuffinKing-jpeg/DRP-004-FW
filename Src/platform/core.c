@@ -12,6 +12,7 @@ void CORE_PWRInit(void)
 void CORE_ClockInit(void)
 {
     RCC->APBENR1 |= RCC_APBENR1_PWREN;
+    RCC->APBENR2 |= RCC_APBENR2_SYSCFGEN;
     RCC->APBENR1 |= RCC_APBENR1_TIM3EN;
 
     RCC->APBSMENR2 |= RCC_APBSMENR1_TIM3SMEN;
@@ -50,7 +51,7 @@ void CORE_TickDelay(uint16_t ticks)
 
 void CORE_SetPA12Remap(void)
 {
-    SYSCFG->CFGR2 |= SYSCFG_CFGR1_PA12_RMP;
+    SYSCFG->CFGR1 |= SYSCFG_CFGR1_PA12_RMP;
 }
 
 #ifdef BUILD_DEBUG

@@ -110,3 +110,29 @@ void TIM1_DisableChannel(TIM1_CHANNEL channel)
         break;
     }
 }
+
+void TIM1_SetOCMode(TIM1_CHANNEL channel, TIM1_OC_ModeTypeDef mode)
+{
+    switch (channel)
+    {
+    case TIM1_CHANNEL_1:
+        TIM1->CCMR1 |= mode << TIM_CCMR1_OC1M_Pos;
+        break;
+    case TIM1_CHANNEL_2:
+        TIM1->CCMR1 |= mode << TIM_CCMR1_OC2M_Pos;
+        break;
+    case TIM1_CHANNEL_3:
+        TIM1->CCMR2 |= mode << TIM_CCMR2_OC3M_Pos;
+        break;
+    case TIM1_CHANNEL_4:
+        TIM1->CCMR2 |= mode << TIM_CCMR2_OC4M_Pos;
+        break;
+    case TIM1_CHANNEL_5:
+        TIM1->CCMR3 |= mode << TIM_CCMR3_OC5M_Pos;
+        break;
+    case TIM1_CHANNEL_6:
+        TIM1->CCMR3 |= mode << TIM_CCMR3_OC6M_Pos;
+        break;
+    default: __NOP();
+    }
+}

@@ -4,11 +4,20 @@
 #include "stm32g0xx.h"
 #include "core.h"
 
+extern GPIO_TypeDef* GPIO_PORT_MAP[5];
+
 extern volatile uint32_t* const PWR_PDCR_MAP[5];
 
 extern volatile uint32_t* const PWR_PUCR_MAP[5];
 
-typedef enum 
+typedef enum
+{
+    GPIO_PULL_NONE,
+    GPIO_PULL_UP,
+    GPIO_PULL_DOWN,
+}GPIO_PullTypeDef;
+
+typedef enum
 {
     GPIO_PORT_A,
     GPIO_PORT_B,
@@ -16,7 +25,7 @@ typedef enum
     GPIO_PORT_D,
     GPIO_PORT_F,
 
-}GPIO_TypePortDef;
+}GPIO_PortTypeDef;
 
 typedef enum
 {
@@ -37,7 +46,7 @@ typedef enum
     GPIO_PIN14,
     GPIO_PIN15,
 
-}GPIO_TypePinDef;
+}GPIO_PinTypeDef;
 
 typedef enum
 {
@@ -45,13 +54,13 @@ typedef enum
     GPIO_MODE_OUTPUT,
     GPIO_MODE_AF,
     GPIO_MODE_RST
-}GPIO_TypeModeDef;
+}GPIO_ModeTypeDef;
 
 typedef enum
 {
     GPIO_OP_MODE_PUSHPULL,
     GPIO_OP_MODE_OPENDRAIN,
-}GPIO_TypeOpModeDef;
+}GPIO_OpModeTypeDef;
 
 typedef enum
 {
@@ -63,23 +72,24 @@ typedef enum
     GPIO_AF5,
     GPIO_AF6,
     GPIO_AF7,
+    GPIO_AF_NONE = 0xFF,
+}GPIO_AFTypeDef;
 
-}GPIO_TypeAFDef;
+void GPIO_TogglePin(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
+void GPIO_SetPin(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
+void GPIO_ResetPin(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 
-void GPIO_TogglePin(GPIO_TypeDef *port, GPIO_TypePinDef pin);
-void GPIO_SetPin(GPIO_TypeDef *port, GPIO_TypePinDef pin);
-void GPIO_ResetPin(GPIO_TypeDef *port, GPIO_TypePinDef pin);
+void GPIO_EnablePort(GPIO_PortTypeDef port_pos);
+void GPIO_SelectMode(GPIO_PortTypeDef port, GPIO_PinTypeDef pin, GPIO_ModeTypeDef mode);
+void GPIO_SelectOpMode(GPIO_PortTypeDef port, GPIO_PinTypeDef pin, GPIO_OpModeTypeDef mode);
+void GPIO_SetAF(GPIO_PortTypeDef port, GPIO_PinTypeDef pin, GPIO_AFTypeDef af);
 
-void GPIO_EnablePort(GPIO_TypePortDef port_pos);
-void GPIO_SelectMode(GPIO_TypeDef *port, GPIO_TypePinDef pin, GPIO_TypeModeDef mode);
-void GPIO_SelectOpMode(GPIO_TypeDef *port, GPIO_TypePinDef pin, GPIO_TypeOpModeDef mode);
-void GPIO_SetAF(GPIO_TypeDef *port, GPIO_TypePinDef pin, GPIO_TypeAFDef af);
+void GPIO_SetPullDown(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
+void GPIO_ResetPullDown(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 
-void GPIO_SetPullDown(GPIO_TypePortDef port, GPIO_TypePinDef pin);
-void GPIO_ReSetPullDown(GPIO_TypePortDef port, GPIO_TypePinDef pin);
+void GPIO_SetPullUp(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
+void GPIO_ResetPullUp(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 
-void GPIO_SetPullUp(GPIO_TypePortDef port, GPIO_TypePinDef pin);
-void GPIO_ReSetPullUp(GPIO_TypePortDef port, GPIO_TypePinDef pin);
+void GPIO_ApplyPull();
 
-void GPIO_ConfigALL(void);
 #endif

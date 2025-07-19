@@ -3,6 +3,10 @@
 
 #include "stm32g0xx.h"
 
+#ifndef ADC_CHANNEL_QTY
+#define ADC_CHANNEL_QTY 1
+#endif
+
 typedef enum
 {
     ADC_CHANNEL_0 = 0x000001,
@@ -46,9 +50,6 @@ typedef enum
     ADC_EXT_RISE_FALL,
 } ADC_ExtPolarity;
 
-#ifndef ADC_CHANNEL_QTY
-#define ADC_CHANNEL_QTY 1
-#endif
 
 extern uint16_t ADC_Data[ADC_CHANNEL_QTY];
 

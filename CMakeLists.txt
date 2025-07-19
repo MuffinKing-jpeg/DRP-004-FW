@@ -38,6 +38,8 @@ endif ()
 
 # Sources
 set(sources_SRCS
+        Src/main.c
+        Src/board.c
         Src/platform/rtc.c
         Src/platform/gpio.c
         Src/platform/core.c
@@ -46,6 +48,7 @@ set(sources_SRCS
         Src/platform/dma.c
         Src/platform/dmamux.c
         Src/platform/TIM/tim1.c
+        Src/platform/TIM/gp_tim.c
         Src/Application/ldr.c
 )
 

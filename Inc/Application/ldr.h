@@ -8,8 +8,6 @@
 #include "dma.h"
 #include "TIM/tim1.h"
 
-#define LDR_PULSE_WIDTH 500
-
 typedef struct
 {
     uint16_t TIM_ARR;

@@ -17,16 +17,13 @@
  */
 
 #include <stdint.h>
-#include "../Inc/main.h"
-#include "../Inc/platform/gpio.h"
-#include "../Inc/platform/adc.h"
+#include "main.h"
+#include "board.h"
+
+#include "platform/gpio.h"
+#include "platform/adc.h"
 #include "TIM/tim1.h"
 #include "ldr.h"
-
-#ifdef ADC_CHANNEL_QTY
-#undef ADC_CHANNEL_QTY
-#define ADC_CHANNEL_QTY 1
-#endif
 
 LDR_ConfigTypeDef LDR_Config = {
     .TIM_ARR = 40000,
@@ -39,10 +36,10 @@ int main(void)
 {
     CORE_ClockInit();
     CORE_PWRInit();
-    GPIO_ConfigALL();
+    BOARD_Init();
     RTC_Init();
-    GPIO_SetPin(GPIOB, GPIO_PIN8);
-    GPIO_SetPin(GPIOA, GPIO_PIN12);
+    GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
+    // GPIO_SetPin(GPIOA, GPIO_PIN12);
     SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
     SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 18000);
     LDR_Init(&LDR_Config);
