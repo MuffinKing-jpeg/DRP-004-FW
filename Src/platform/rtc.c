@@ -1,4 +1,6 @@
-#include "rtc.h"
+#include "../../Inc/platform/rtc.h"
+
+#include "board.h"
 #include "gpio.h"
 #define LED_DURATION 100
 
@@ -12,7 +14,9 @@ void RTC_Init(void)
     RCC->BDCR |= RCC_BDCR_RTCSEL_1;
 
     RTC->WPR = 0xCA;
+    CORE_TickDelay(100);
     RTC->WPR = 0x53;
+    CORE_TickDelay(100);
 
     RTC->CR &= ~RTC_CR_WUTE;
     RTC->ICSR = RTC_ICSR_INIT;
@@ -41,6 +45,6 @@ void RTC_TAMP_IRQHandler(void)
     if (LED_Counter >= LED_DURATION)
     {
         LED_Counter = 0;
-        GPIO_TogglePin(GPIOA, GPIO_PIN7);
+        GPIO_TogglePin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
     }
 }
