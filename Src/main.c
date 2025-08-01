@@ -23,7 +23,7 @@
 #include "platform/gpio.h"
 #include "platform/adc.h"
 #include "TIM/tim1.h"
-#include "ldr.h"
+#include "app_ldr.h"
 
 LDR_ConfigTypeDef LDR_Config = {
     .TIM_ARR = 0xFFFF,
@@ -55,5 +55,5 @@ int main(void)
 
 void DMA1_Channel1_IRQHandler(void)
 {
-    LDR_Handler(&LDR_Config);
+    __NOP();
 }

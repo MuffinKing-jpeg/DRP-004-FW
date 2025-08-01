@@ -49,7 +49,10 @@ set(sources_SRCS
         Src/platform/dmamux.c
         Src/platform/TIM/tim1.c
         Src/platform/TIM/gp_tim.c
-        Src/Application/ldr.c
+        Src/app/app_ldr.c
+        Src/app/app_init.c
+        Src/app/app_power.c
+        Src/app/app_state.c
 )
 
 # Include directories for all compilers
@@ -57,7 +60,7 @@ set(include_DIRS
         "${CMAKE_CURRENT_SOURCE_DIR}/Inc"
         "${CMAKE_CURRENT_SOURCE_DIR}/Inc/platform"
         "${CMAKE_CURRENT_SOURCE_DIR}/Inc/platform/TIM"
-        "${CMAKE_CURRENT_SOURCE_DIR}/Inc/Application"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Inc/app"
 )
 
 # Include directories for each compiler

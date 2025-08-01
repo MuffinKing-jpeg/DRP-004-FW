@@ -1,4 +1,4 @@
-#include "ldr.h"
+#include "app_ldr.h"
 #include "board.h"
 
 TIM1_ConfigTypeDef TIM1_Config = {
@@ -72,9 +72,4 @@ void LDR_Start(const LDR_ConfigTypeDef* LDR_Config)
 void LDR_Stop(LDR_ConfigTypeDef* LDR_Config)
 {
     // TODO: HOW TO STOP LDR? LOL
-}
-
-void LDR_Handler(LDR_ConfigTypeDef* LDR_Config)
-{
-    // TODO: ADC trigger first!
 }

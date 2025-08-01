@@ -2,7 +2,6 @@
 #define __GPIO_H
 
 #include "stm32g0xx.h"
-#include "core.h"
 
 extern GPIO_TypeDef* GPIO_PORT_MAP[5];
 
