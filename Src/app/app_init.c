@@ -19,7 +19,7 @@ void APP_Init(void)
     LDR_Init();
 }
 
-void APP_InitADC(void)
+void APP_InitADCByTrigger(void)
 {
     ADC_RCC_Enable();
     TIM1_Enable();
@@ -34,7 +34,7 @@ void APP_InitADC(void)
     TIM1_TRGO2_Config(TIM_MMS2_UPDATE);
 }
 
-void APP_initDMA(void)
+void APP_InitADCTransferDMA(void)
 {
 
     DMA_Init(ADC_Config.DMA_Channel);
@@ -51,11 +51,9 @@ void APP_initDMA(void)
     DMAMUX_SetReqID(DMAMUX1_Channel0, DMAMUX_ADC);
 }
 
-void APP_InitGPIO(void)
+void APP_InitDefaultGPIO(void)
 {
-    GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
-    GPIO_SetPin(BOARD_LDR_EN.gpioPort, BOARD_LDR_EN.gpioPin);
-    GPIO_SetPin(BOARD_BAT_load.gpioPort, BOARD_BAT_load.gpioPin);
+    GPIO_SetPin(BOARD_ON_LATCH.gpioPort, BOARD_ON_LATCH.gpioPin);
 }
 
 void APP_InitSERVO(void)

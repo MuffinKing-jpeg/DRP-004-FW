@@ -32,9 +32,9 @@
 int main(void)
 {
     APP_Init();
-    APP_InitGPIO();
-    APP_initDMA();
-    APP_InitADC();
+    APP_InitDefaultGPIO();
+    APP_InitADCTransferDMA();
+    APP_InitADCByTrigger();
     LDR_Start(&ADC_Config);
 
     /* Loop forever */
