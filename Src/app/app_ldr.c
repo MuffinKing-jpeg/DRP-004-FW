@@ -1,4 +1,6 @@
 #include "app_ldr.h"
+
+#include "adc.h"
 #include "board.h"
 #include "tim1.h"
 #include "app_config.h"
