@@ -33,6 +33,8 @@ extern const BOARD_GpioConfTypeDef BOARD_DCMode_SW;
 extern const BOARD_GpioConfTypeDef BOARD_PMIC_CHRG;
 extern const BOARD_GpioConfTypeDef BOARD_PMIC_PG;
 extern const BOARD_GpioConfTypeDef BOARD_LED;
+extern const BOARD_GpioConfTypeDef BOARD_ON_LATCH;
+extern const BOARD_GpioConfTypeDef BOARD_ON_Detect;
 
 void BOARD_Init(void);
 

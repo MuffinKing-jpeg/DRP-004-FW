@@ -92,6 +92,24 @@ const BOARD_GpioConfTypeDef BOARD_LED = {
     .gpioPull = GPIO_PULL_NONE,
 };
 
+const BOARD_GpioConfTypeDef BOARD_ON_LATCH = {
+    .gpioPin = GPIO_PIN1,
+    .gpioPort = GPIO_PORT_A,
+    .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
+    .gpioMode = GPIO_MODE_OUTPUT,
+    .gpioAF = GPIO_AF_NONE,
+    .gpioPull = GPIO_PULL_NONE,
+};
+
+const BOARD_GpioConfTypeDef BOARD_ON_Detect = {
+    .gpioPin = GPIO_PIN2,
+    .gpioPort = GPIO_PORT_A,
+    .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
+    .gpioMode = GPIO_MODE_INPUT,
+    .gpioAF = GPIO_AF_NONE,
+    .gpioPull = GPIO_PULL_DOWN
+};
+
 BOARD_GpioConfTypeDef BOARD_PinConfig[] = {
     BOARD_Servo_PWM,
     BOARD_Servo_EN,
@@ -103,11 +121,12 @@ BOARD_GpioConfTypeDef BOARD_PinConfig[] = {
     BOARD_PMIC_CHRG,
     BOARD_PMIC_PG,
     BOARD_LED,
+    BOARD_ON_LATCH,
+    BOARD_ON_Detect
 };
 
 void BOARD_Init(void)
 {
-
     CORE_ClockInit();
     CORE_PWRInit();
     GPIO_EnablePort(GPIO_PORT_B);
