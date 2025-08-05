@@ -3,6 +3,7 @@
 
 void APP_Init(void);
 void APP_InitADC(void);
+void APP_initDMA(void);
 void APP_InitGPIO(void);
 void APP_InitSERVO(void);
 

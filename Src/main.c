@@ -23,28 +23,19 @@
 #include "platform/gpio.h"
 #include "platform/adc.h"
 #include "TIM/tim1.h"
+#include "app_init.h"
 #include "app_ldr.h"
+#include "app_config.h"
 
-LDR_ConfigTypeDef LDR_Config = {
-    .TIM_ARR = 0xFFFF,
-    .TIM_PSC = 0,
-    .DMA_Channel = DMA1_Channel1,
-    .ADC_Channel = ADC_CHANNEL_15,
-};
+
 
 int main(void)
 {
-    CORE_ClockInit();
-    CORE_PWRInit();
-    BOARD_Init();
-    RTC_Init();
-    GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
-    GPIO_SetPin(BOARD_LDR_EN.gpioPort, BOARD_LDR_EN.gpioPin);
-    GPIO_SetPin(BOARD_BAT_load.gpioPort, BOARD_BAT_load.gpioPin);
-    SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
-    SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 18000);
-    LDR_Init(&LDR_Config);
-    LDR_Start(&LDR_Config);
+    APP_Init();
+    APP_InitGPIO();
+    APP_initDMA();
+    APP_InitADC();
+    LDR_Start(&ADC_Config);
 
     /* Loop forever */
     while (1)

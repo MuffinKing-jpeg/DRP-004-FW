@@ -1,6 +1,6 @@
 #include "board.h"
-
-
+#include "core.h"
+#include "adc.h"
 
 const BOARD_GpioConfTypeDef BOARD_Servo_PWM = {
     .gpioPin = GPIO_PIN5,
@@ -107,6 +107,9 @@ BOARD_GpioConfTypeDef BOARD_PinConfig[] = {
 
 void BOARD_Init(void)
 {
+
+    CORE_ClockInit();
+    CORE_PWRInit();
     GPIO_EnablePort(GPIO_PORT_B);
     GPIO_EnablePort(GPIO_PORT_A);
 

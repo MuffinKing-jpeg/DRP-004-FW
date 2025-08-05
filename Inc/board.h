@@ -2,7 +2,6 @@
 #define BOARD_H
 
 #include "gpio.h"
-#include "adc.h"
 
 #ifdef BOARD_ADC_CHANNEL_QTY
 #undef BOARD_ADC_CHANNEL_QTY

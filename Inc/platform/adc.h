@@ -4,10 +4,6 @@
 #include "stm32g0xx.h"
 #include "board.h"
 
-#ifndef BOARD_ADC_CHANNEL_QTY
-#define BOARD_ADC_CHANNEL_QTY 1
-#endif
-
 typedef enum
 {
     ADC_CHANNEL_0 = 0x000001,
