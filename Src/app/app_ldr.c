@@ -6,12 +6,13 @@
 #include "app_config.h"
 #include "dma.h"
 
-void LDR_Init(void)
+void APP_LDRInit(void)
 {
 
 }
-void LDR_Start()
+void APP_LDRStart()
 {
+    // BRUH, again platform code
 #ifdef BUILD_DEBUG
     DBG->APBFZ2 |= DBG_APB_FZ2_DBG_TIM1_STOP;
 #endif
@@ -22,7 +23,7 @@ void LDR_Start()
     ADC_Enable();
 }
 
-void LDR_Stop(void)
+void APP_LDRStop(void)
 {
     // TODO: HOW TO STOP LDR? LOL
 }

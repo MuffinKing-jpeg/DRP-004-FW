@@ -16,7 +16,7 @@ void APP_Init(void)
     RTC_Init();
     SERVO_TIMConfig(TIM3, TIM_CHANNEL_2);
     SERVO_SetAngle(TIM3, TIM_CHANNEL_2, 18000);
-    LDR_Init();
+    APP_LDRInit();
 }
 
 void APP_InitADCByTrigger(void)
