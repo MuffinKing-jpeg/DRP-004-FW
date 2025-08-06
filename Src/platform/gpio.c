@@ -93,3 +93,8 @@ void GPIO_ApplyPull(void)
 {
     PWR->CR3 |= PWR_CR3_APC;
 }
+
+GPIO_StateTypeDef GPIO_GetState(GPIO_PortTypeDef port, GPIO_PinTypeDef pin)
+{
+    return (GPIO_StateTypeDef)(GPIO_PORT_MAP[port]->IDR & (1UL << pin))>>pin;
+}

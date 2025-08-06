@@ -4,8 +4,6 @@
 #include "gpio.h"
 #define LED_DURATION 100
 
-uint8_t LED_Counter = 0;
-
 void RTC_Init(void)
 {
     RCC->APBENR1 |= RCC_APBENR1_RTCAPBEN;
@@ -36,15 +34,7 @@ void RTC_Init(void)
     NVIC_EnableIRQ(RTC_TAMP_IRQn);
 }
 
-void RTC_TAMP_IRQHandler(void)
+void RTC_ClearWUTF(void)
 {
-    CORE_ExitSTOP();
     RTC->SCR = RTC_SCR_CWUTF;
-    LED_Counter++;
-
-    if (LED_Counter >= LED_DURATION)
-    {
-        LED_Counter = 0;
-        GPIO_TogglePin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
-    }
 }

@@ -4,10 +4,6 @@
 #include "stm32g0xx.h"
 #include "board.h"
 
-#ifndef BOARD_ADC_CHANNEL_QTY
-#define BOARD_ADC_CHANNEL_QTY 1
-#endif
-
 typedef enum
 {
     ADC_CHANNEL_0 = 0x000001,
@@ -65,7 +61,7 @@ void ADC_Calibration(void);
 void ADC_Start(void);
 void ADC_Enable(void);
 
-void ADC_MultiModeEnable(void);
+void ADC_EnableWaitMode(void);
 void ADC_EnableCircularDMA(void);
 void ADC_EnableSingleShotDMA(void);
 

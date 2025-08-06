@@ -6,7 +6,6 @@
 
 
 void RTC_Init(void);
-
-void RTC_TAMP_IRQHandler(void);
+void RTC_ClearWUTF(void);
 
 #endif

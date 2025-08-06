@@ -41,7 +41,7 @@ void CORE_ExitSTOP(void)
     PWR->CR1 &= ~PWR_CR1_LPR;                   // Disable LP regulator
     CORE_TickDelay(100);
     RCC->CR &= ~RCC_CR_HSIDIV;                  // Speed-up to 16MHz
-    RCC->CFGR |= RCC_CFGR_PPRE;
+    RCC->CFGR |= RCC_CFGR_PPRE;                 // Keep APB at 2MHz
 }
 
 void CORE_TickDelay(uint16_t ticks)
