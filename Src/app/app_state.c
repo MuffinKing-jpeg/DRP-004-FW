@@ -11,12 +11,22 @@
 APP_StateTypeDef currentState = APP_STATE_IDLE;
 uint32_t currentTick = 0;
 
+struct TickDiff
+{
+    APP_ValueTypeDef current;
+    APP_ValueTypeDef last;
+};
+
+struct TickDiff isBtnPressed = {VALUE_OFF,VALUE_OFF};
+
 void setStateIdle(void)
 {
     APP_Power_SetConverterMode(APP_POWER_CONVERTER_MODE_PWM);
-    LDR_Stop();
+    APP_LDRStop();
+    GPIO_ResetPin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
     currentState = APP_STATE_IDLE;
 }
+
 void setStateArmed(void)
 {
     APP_Power_SetConverterMode(APP_POWER_CONVERTER_MODE_PFM);
@@ -24,9 +34,11 @@ void setStateArmed(void)
     APP_Power_SetLDR(VALUE_ON);
     APP_InitADCByTrigger();
     APP_InitADCTransferDMA();
-    LDR_Start();
+    APP_LDRStart();
+    GPIO_SetPin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
     currentState = APP_STATE_ARMED;
 }
+
 void setStateDropped(void)
 {
     currentState = APP_STATE_DROPPED;
@@ -36,29 +48,35 @@ void APP_State_Set(const APP_StateTypeDef state)
 {
     switch (state)
     {
-        case APP_STATE_IDLE:
+    case APP_STATE_IDLE:
         setStateIdle();
         break;
-        case APP_STATE_ARMED:
+    case APP_STATE_ARMED:
         setStateArmed();
         break;
-        case APP_STATE_DROPPED:
+    case APP_STATE_DROPPED:
         setStateDropped();
         break;
     }
-
 }
+
 void APP_State_TickHandler()
 {
-    GPIO_StateTypeDef isBtnPressed = GPIO_GetState(BOARD_ON_Detect.gpioPort, BOARD_ON_Detect.gpioPin);
+    isBtnPressed.last = isBtnPressed.current;
+    isBtnPressed.current = (APP_ValueTypeDef)GPIO_GetState(BOARD_ON_Detect.gpioPort, BOARD_ON_Detect.gpioPin);
+
     // isBtnPressed inverted due to how button is implemented on hardware
-    if (!isBtnPressed && currentState != APP_STATE_ARMED)
+    if (!isBtnPressed.current && isBtnPressed.last)
     {
-        APP_State_Set(APP_STATE_ARMED);
-    }
-    else
-    {
-        APP_State_Set(APP_STATE_IDLE);
+        switch (currentState)
+        {
+        case APP_STATE_IDLE:
+        case APP_STATE_DROPPED:
+            setStateArmed();
+            break;
+        case APP_STATE_ARMED:
+            setStateIdle();
+        }
     }
     currentTick++;
 }
@@ -66,8 +84,8 @@ void APP_State_TickHandler()
 APP_StateTypeDef APP_State_Get(void)
 {
     return currentState;
-
 }
+
 uint32_t APP_State_GetTick(void)
 {
     return currentTick;

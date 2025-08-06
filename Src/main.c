@@ -19,10 +19,6 @@
 #include <stdint.h>
 #include "main.h"
 #include "app_init.h"
-#include "app_ldr.h"
-#include "app_config.h"
-
-
 
 int main(void)
 {
