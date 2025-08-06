@@ -4,10 +4,6 @@
 #include "gpio.h"
 #define LED_DURATION 100
 
-uint8_t LED_Counter = 0;
-
-uint32_t currentTick = 0;
-
 void RTC_Init(void)
 {
     RCC->APBENR1 |= RCC_APBENR1_RTCAPBEN;
@@ -38,14 +34,7 @@ void RTC_Init(void)
     NVIC_EnableIRQ(RTC_TAMP_IRQn);
 }
 
-uint32_t RTC_GetTick(void)
+void RTC_ClearWUTF(void)
 {
-    return currentTick;
-}
-
-void RTC_TAMP_IRQHandler(void)
-{
-    CORE_ExitSTOP();
     RTC->SCR = RTC_SCR_CWUTF;
-    currentTick++;
 }

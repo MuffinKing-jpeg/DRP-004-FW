@@ -18,11 +18,6 @@
 
 #include <stdint.h>
 #include "main.h"
-#include "board.h"
-
-#include "platform/gpio.h"
-#include "platform/adc.h"
-#include "TIM/tim1.h"
 #include "app_init.h"
 #include "app_ldr.h"
 #include "app_config.h"
@@ -42,9 +37,4 @@ int main(void)
     {
         CORE_EnterSTOP();
     }
-}
-
-void DMA1_Channel1_IRQHandler(void)
-{
-    __NOP();
 }

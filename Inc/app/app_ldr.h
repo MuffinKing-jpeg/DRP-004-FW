@@ -5,9 +5,9 @@
 
 
 void LDR_Init(void);
-void LDR_Start(const APP_ConfigADC_TypeDef* LDR_Config);
-void LDR_Stop(APP_ConfigADC_TypeDef* LDR_Config);
+void LDR_Start(const APP_ConfigTIMTrigger_TypeDef* LDR_Config);
+void LDR_Stop(APP_ConfigTIMTrigger_TypeDef* LDR_Config);
 
-void LDR_Handler(APP_ConfigADC_TypeDef* LDR_Config);
+void LDR_Handler(APP_ConfigTIMTrigger_TypeDef* LDR_Config);
 
 #endif

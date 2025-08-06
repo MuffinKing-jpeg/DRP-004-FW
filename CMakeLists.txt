@@ -48,7 +48,7 @@ set(sources_SRCS
         Src/platform/dma.c
         Src/platform/dmamux.c
         Src/platform/TIM/tim1.c
-        Src/platform/TIM/gp_tim.c
+        Src/platform/interrupt_handlers.c
         Src/app/app_ldr.c
         Src/app/app_init.c
         Src/app/app_power.c

@@ -74,9 +74,17 @@ typedef enum
     GPIO_AF_NONE = 0xFF,
 }GPIO_AFTypeDef;
 
+typedef enum
+{
+    GPIO_RESET,
+    GPIO_SET,
+} GPIO_StateTypeDef;
+
 void GPIO_TogglePin(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 void GPIO_SetPin(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 void GPIO_ResetPin(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
+
+GPIO_StateTypeDef GPIO_GetState(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 
 void GPIO_EnablePort(GPIO_PortTypeDef port_pos);
 void GPIO_SelectMode(GPIO_PortTypeDef port, GPIO_PinTypeDef pin, GPIO_ModeTypeDef mode);
