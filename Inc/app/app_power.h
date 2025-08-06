@@ -1,7 +1,7 @@
 #ifndef APP_POWER_H
 #define APP_POWER_H
 
-#include "board.h"
+#include "app_state.h"
 // Currently this is placeholders
 #define BATTERY_LOW_THRESHOLD 2000
 #define BATTERY_DEAD_THRESHOLD 1500
@@ -21,7 +21,9 @@ typedef enum
     APP_POWER_CONVERTER_MODE_PFM = 0x01,
 } APP_PowerConverterModeTypeDef;
 
-void APP_Power_SetConverterMode(APP_PowerConverterModeTypeDef mode);
 void APP_Power_CheckBatteryState(uint16_t battValue);
 
+void APP_Power_SetConverterMode(APP_PowerConverterModeTypeDef mode);
+void APP_Power_SetBatteryLoad(APP_ValueTypeDef value);
+void APP_Power_SetLDR(APP_ValueTypeDef value);
 #endif //APP_POWER_H

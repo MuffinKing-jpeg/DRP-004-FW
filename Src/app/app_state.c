@@ -1,5 +1,7 @@
 #include "app_state.h"
-
+#include "app_init.h"
+#include "app_ldr.h"
+#include "app_power.h"
 #include "board.h"
 #include "gpio.h"
 
@@ -11,10 +13,18 @@ uint32_t currentTick = 0;
 
 void setStateIdle(void)
 {
+    APP_Power_SetConverterMode(APP_POWER_CONVERTER_MODE_PWM);
+    LDR_Stop();
     currentState = APP_STATE_IDLE;
 }
 void setStateArmed(void)
 {
+    APP_Power_SetConverterMode(APP_POWER_CONVERTER_MODE_PFM);
+    APP_Power_SetBatteryLoad(VALUE_ON);
+    APP_Power_SetLDR(VALUE_ON);
+    APP_InitADCByTrigger();
+    APP_InitADCTransferDMA();
+    LDR_Start();
     currentState = APP_STATE_ARMED;
 }
 void setStateDropped(void)

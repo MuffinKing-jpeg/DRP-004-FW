@@ -5,6 +5,14 @@
 #include "dma.h"
 #include "tim1.h"
 
+// #define USE_POWER_LATCH
+
+typedef enum
+{
+    APP_CONF_LDR_ARR_INDEX,
+    APP_CONF_BATT_ARR_INDEX,
+} APP_ConfigADCIndex;
+
 typedef struct
 {
     uint16_t TIM_ARR;

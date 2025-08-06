@@ -9,6 +9,12 @@ typedef enum
     APP_STATE_DROPPED = 0x02,
 } APP_StateTypeDef;
 
+typedef enum
+{
+    VALUE_OFF = 0x00,
+    VALUE_ON = 0x01,
+} APP_ValueTypeDef;
+
 void APP_State_Set(APP_StateTypeDef state);
 void APP_State_TickHandler();
 
