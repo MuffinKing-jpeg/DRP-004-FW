@@ -60,10 +60,10 @@ void ADC_SetExternalTriggerPolarity(ADC_ExtPolarity polarity)
     ADC1->CFGR1 |= (polarity << ADC_CFGR1_EXTEN_Pos);
 }
 
-void ADC_MultiModeEnable(void)
+void ADC_EnableWaitMode(void)
 {
     ADC1->CFGR1 |= ADC_CFGR1_SCANDIR;
-    ADC1->CFGR1 |= ADC_CFGR1_CONT;
+    ADC1->CFGR1 |= ADC_CFGR1_WAIT;
 }
 
 void ADC_EnableCircularDMA(void)

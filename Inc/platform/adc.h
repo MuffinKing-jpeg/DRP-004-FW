@@ -61,7 +61,7 @@ void ADC_Calibration(void);
 void ADC_Start(void);
 void ADC_Enable(void);
 
-void ADC_MultiModeEnable(void);
+void ADC_EnableWaitMode(void);
 void ADC_EnableCircularDMA(void);
 void ADC_EnableSingleShotDMA(void);
 

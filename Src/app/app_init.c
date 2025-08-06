@@ -28,7 +28,7 @@ void APP_InitADCByTrigger(void)
     ADC_SetExternalTriggerSource(ADC_TRG0);
     ADC_SetChannel(BOARD_ADC_CHANNEL_LIST);
     ADC_EnableCircularDMA();
-    ADC1->CFGR1 |= ADC_CFGR1_WAIT; // BRUH. just for quick prototyping. Move to driver ASAP.
+    ADC_EnableWaitMode();
     TIM1_Init(&TIM1_Config);
     TIM1_EnableChannel(TIM1_CHANNEL_5);
     TIM1_TRGO2_Config(TIM_MMS2_UPDATE);
@@ -53,7 +53,9 @@ void APP_InitADCTransferDMA(void)
 
 void APP_InitDefaultGPIO(void)
 {
+#ifdef USE_POWER_LATCH
     GPIO_SetPin(BOARD_ON_LATCH.gpioPort, BOARD_ON_LATCH.gpioPin);
+#endif
 }
 
 void APP_InitSERVO(void)
