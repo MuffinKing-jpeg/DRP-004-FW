@@ -1,21 +1,24 @@
 #include "../../Inc/platform/adc.h"
 #include "../../Inc/platform/core.h"
 
-uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY] = {0};
+uint8_t lastCalib = 0;
 
-void ADC_RCC_Enable(void){
+void ADC_RCC_Enable(void)
+{
     RCC->APBENR2 |= RCC_APBENR2_ADCEN;
     RCC->APBSMENR2 |= RCC_APBSMENR2_ADCSMEN;
     ADC1->CR |= ADC_CR_ADVREGEN;
     CORE_TickDelay(1000);
 }
 
-void ADC_RCC_Disable(void){
+void ADC_RCC_Disable(void)
+{
     RCC->APBENR2 &= ~RCC_APBENR2_ADCEN;
     RCC->APBSMENR2 &= ~RCC_APBSMENR2_ADCSMEN;
 }
 
-void ADC_Reset(void){
+void ADC_Reset(void)
+{
     RCC->APBRSTR2 |= RCC_APBRSTR2_ADCRST;
     CORE_TickDelay(50);
     RCC->APBRSTR2 &= ~RCC_APBRSTR2_ADCRST;
@@ -39,8 +42,21 @@ void ADC_SetExternalTriggerSource(ADC_ExtTrigger source)
 
 void ADC_Calibration(void)
 {
-    ADC1->CR |= ADC_CR_ADCAL;
-    while (ADC1->CR & ADC_CR_ADCAL);
+    if (ADC1->CR & ADC_CR_ADEN &&
+        ADC1->CR & ADC_CR_ADSTART &&
+        ADC1->CR & ADC_CR_ADSTP &&
+        ADC1->CR & ADC_CR_ADDIS &&
+        ADC1->CR & ADC_CR_ADCAL &&
+        ADC1->CFGR1 & ADC_CFGR1_AUTOFF)
+    {
+        ADC1->CALFACT = lastCalib;
+    }
+    else
+    {
+        ADC1->CR |= ADC_CR_ADCAL;
+        while (ADC1->CR & ADC_CR_ADCAL);
+        lastCalib = (uint8_t)ADC1->CALFACT;
+    }
 }
 
 void ADC_Enable(void)

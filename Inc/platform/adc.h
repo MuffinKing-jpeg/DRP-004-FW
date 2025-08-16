@@ -4,6 +4,8 @@
 #include "stm32g0xx.h"
 #include "board.h"
 
+
+
 typedef enum
 {
     ADC_CHANNEL_0 = 0x000001,
@@ -48,7 +50,7 @@ typedef enum
 } ADC_ExtPolarity;
 
 
-extern uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY];
+static uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY] = {0};
 
 void ADC_RCC_Enable(void);
 void ADC_RCC_Disable(void);
