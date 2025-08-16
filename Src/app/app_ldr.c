@@ -17,10 +17,10 @@ void APP_LDRStart()
     DBG->APBFZ2 |= DBG_APB_FZ2_DBG_TIM1_STOP;
 #endif
     ADC_Start();
-    DMA_EnableInterrupt(ADC_Config.DMA_Channel, DMA1_Channel1_IRQn);
-    DMA_Enable(ADC_Config.DMA_Channel);
-    TIM1_Start();
     ADC_Enable();
+    DMA_EnableInterrupt(ADC_Config.DMA_Channel, DMA1_Channel1_IRQn);
+    TIM1_Start();
+    DMA_Enable(ADC_Config.DMA_Channel);
 }
 
 void APP_LDRStop(void)
