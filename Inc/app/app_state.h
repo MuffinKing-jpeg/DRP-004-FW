@@ -2,7 +2,6 @@
 #define APP_STATE_H
 
 #include <stdint.h>
-#include "board.h"
 
 typedef enum
 {
@@ -18,7 +17,7 @@ typedef enum
 } APP_ValueTypeDef;
 
 void APP_State_Set(APP_StateTypeDef state);
-void APP_State_TickHandler();
+void APP_State_TickHandler(void);
 
 APP_StateTypeDef APP_State_Get(void);
 uint32_t APP_State_GetTick(void);

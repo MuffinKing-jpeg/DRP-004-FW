@@ -1,5 +1,8 @@
 #include "../../Inc/platform/rtc.h"
 
+#include "core.h"
+#include "stm32g031xx.h"
+
 #define LED_DURATION 100
 
 void RTC_Init(void)

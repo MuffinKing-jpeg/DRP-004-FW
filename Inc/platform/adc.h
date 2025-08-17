@@ -1,9 +1,5 @@
-#ifndef __ADC_H
-#define __ADC_H
-
-#include "stm32g0xx.h"
-#include "board.h"
-
+#ifndef ADC_H
+#define ADC_H
 
 
 typedef enum

@@ -1,5 +1,5 @@
-#ifndef __CORE_H
-#define __CORE_H
+#ifndef CORE_H
+#define CORE_H
 
 #include "stm32g0xx.h"
 
