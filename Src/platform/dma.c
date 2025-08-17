@@ -6,7 +6,7 @@ void DMA_Init(DMA_Channel_TypeDef* DMA_Channel)
     RCC->AHBENR |= RCC_AHBENR_DMA1EN;
 }
 
-void DMA_SetDirection(DMA_Channel_TypeDef* DMA_Channel, DMA_DirectionTypeDef DMA_Direction)
+void DMA_SetDirection(DMA_Channel_TypeDef* DMA_Channel,const DMA_DirectionTypeDef DMA_Direction)
 {
     switch (DMA_Direction)
     {
@@ -26,17 +26,17 @@ void DMA_SetDirection(DMA_Channel_TypeDef* DMA_Channel, DMA_DirectionTypeDef DMA
     }
 }
 
-void DMA_SetPeripherySize(DMA_Channel_TypeDef* DMA_Channel, DMA_DataSizeTypeDef Size)
+void DMA_SetPeripherySize(DMA_Channel_TypeDef* DMA_Channel,const DMA_DataSizeTypeDef Size)
 {
     DMA_Channel->CCR |= Size << DMA_CCR_PSIZE_Pos;
 }
 
-void DMA_SetMemorySize(DMA_Channel_TypeDef* DMA_Channel, DMA_DataSizeTypeDef Size)
+void DMA_SetMemorySize(DMA_Channel_TypeDef* DMA_Channel,const DMA_DataSizeTypeDef Size)
 {
     DMA_Channel->CCR |= Size << DMA_CCR_MSIZE_Pos;
 }
 
-void DMA_SetIncrementType(DMA_Channel_TypeDef* DMA_Channel, DMA_IncrementTypeDef Increment)
+void DMA_SetIncrementType(DMA_Channel_TypeDef* DMA_Channel,const DMA_IncrementTypeDef Increment)
 {
     switch (Increment)
     {
@@ -55,7 +55,7 @@ void DMA_SetIncrementType(DMA_Channel_TypeDef* DMA_Channel, DMA_IncrementTypeDef
     }
 }
 
-void DMA_SetArraySize(DMA_Channel_TypeDef* DMA_Channel, uint32_t Size)
+void DMA_SetArraySize(DMA_Channel_TypeDef* DMA_Channel, const uint32_t Size)
 {
     DMA_Channel->CNDTR = Size;
 }
@@ -90,13 +90,13 @@ void DMA_Disable(DMA_Channel_TypeDef* DMA_Channel)
     DMA_Channel->CCR &= ~DMA_CCR_EN;
 }
 
-void DMA_EnableInterrupt(DMA_Channel_TypeDef* DMA_Channel, IRQn_Type IRQn)
+void DMA_EnableInterrupt(DMA_Channel_TypeDef* DMA_Channel, const IRQn_Type IRQn)
 {
     DMA_Channel->CCR |= DMA_CCR_TCIE;
     NVIC_EnableIRQ(IRQn);
 }
 
-void DMA_DisableInterrupt(DMA_Channel_TypeDef* DMA_Channel, IRQn_Type IRQn)
+void DMA_DisableInterrupt(DMA_Channel_TypeDef* DMA_Channel, const IRQn_Type IRQn)
 {
     DMA_Channel->CCR &= ~DMA_CCR_TCIE;
     NVIC_DisableIRQ(IRQn);

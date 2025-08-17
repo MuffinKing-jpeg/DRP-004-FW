@@ -24,22 +24,22 @@ void TIM1_Start(void)
     TIM1->CR1 |= TIM_CR1_CEN;
 }
 
-void TIM1_SetARR(uint16_t ARRValue)
+void TIM1_SetARR(const uint16_t ARRValue)
 {
     TIM1->ARR = ARRValue;
 }
 
-void TIM1_SetPrescaler(uint16_t PSCValue)
+void TIM1_SetPrescaler(const uint16_t PSCValue)
 {
     TIM1->PSC = PSCValue;
 }
 
-void TIM1_TRGO2_Config(TIM1_TRGO2_Source TRGO2Source)
+void TIM1_TRGO2_Config(const TIM1_TRGO2_Source TRGO2Source)
 {
     TIM1->CR2 |= TRGO2Source << TIM_CR2_MMS2_Pos;
 }
 
-void TIM1_EnableChannel(TIM1_CHANNEL channel)
+void TIM1_EnableChannel(const TIM1_CHANNEL channel)
 {
     switch (channel)
     {
@@ -64,7 +64,7 @@ void TIM1_EnableChannel(TIM1_CHANNEL channel)
     }
 }
 
-void TIM1_EnableChannelOutput(TIM1_CHANNEL channel)
+void TIM1_EnableChannelOutput(const TIM1_CHANNEL channel)
 {
     switch (channel)
     {
@@ -86,7 +86,7 @@ void TIM1_EnableChannelOutput(TIM1_CHANNEL channel)
     }
 }
 
-void TIM1_DisableChannel(TIM1_CHANNEL channel)
+void TIM1_DisableChannel(const TIM1_CHANNEL channel)
 {
     switch (channel)
     {

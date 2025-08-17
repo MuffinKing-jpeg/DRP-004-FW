@@ -24,20 +24,20 @@ void ADC_Reset(void)
     RCC->APBRSTR2 &= ~RCC_APBRSTR2_ADCRST;
 }
 
-void ADC_SetChannel(ADC_ChannelTypeDef channel)
+void ADC_SetChannel(const ADC_ChannelTypeDef channel)
 {
     ADC1->CHSELR |= channel;
 }
 
-void ADC_ResetChannel(ADC_ChannelTypeDef channel)
+void ADC_ResetChannel(const ADC_ChannelTypeDef channel)
 {
     ADC1->CHSELR &= ~channel;
 }
 
-void ADC_SetExternalTriggerSource(ADC_ExtTrigger source)
+void ADC_SetExternalTriggerSource(const ADC_ExtTrigger source)
 {
     ADC1->CFGR1 &= ~ADC_CFGR1_EXTSEL;
-    ADC1->CFGR1 |= (source << ADC_CFGR1_EXTSEL_Pos);
+    ADC1->CFGR1 |= source << ADC_CFGR1_EXTSEL_Pos;
 }
 
 void ADC_Calibration(void)
@@ -54,7 +54,7 @@ void ADC_Calibration(void)
     else
     {
         ADC1->CR |= ADC_CR_ADCAL;
-        while (ADC1->CR & ADC_CR_ADCAL);
+        while (ADC1->CR & ADC_CR_ADCAL)
         lastCalib = (uint8_t)ADC1->CALFACT;
     }
 }
@@ -70,10 +70,10 @@ void ADC_Start(void)
     ADC1->CR |= ADC_CR_ADSTART;
 }
 
-void ADC_SetExternalTriggerPolarity(ADC_ExtPolarity polarity)
+void ADC_SetExternalTriggerPolarity(const ADC_ExtPolarity polarity)
 {
     ADC1->CFGR1 &= ~ADC_CFGR1_EXTEN;
-    ADC1->CFGR1 |= (polarity << ADC_CFGR1_EXTEN_Pos);
+    ADC1->CFGR1 |= polarity << ADC_CFGR1_EXTEN_Pos;
 }
 
 void ADC_EnableWaitMode(void)

@@ -83,8 +83,8 @@ typedef enum {
 } DMAMUX_RequestID;
 
 
-void DMAMUX_Enable();
-void DMAMUX_Disable();
+void DMAMUX_Enable(void);
+void DMAMUX_Disable(void);
 void DMAMUX_SetReqID(DMAMUX_Channel_TypeDef* channel, DMAMUX_RequestID id);
 
 #endif //DMAMUX_H

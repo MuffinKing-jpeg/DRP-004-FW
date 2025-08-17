@@ -1,6 +1,5 @@
 #include "board.h"
 #include "core.h"
-#include "adc.h"
 
 const BOARD_GpioConfTypeDef BOARD_Servo_PWM = {
     .gpioPin = GPIO_PIN5,

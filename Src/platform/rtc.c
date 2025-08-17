@@ -1,7 +1,5 @@
 #include "../../Inc/platform/rtc.h"
 
-#include "board.h"
-#include "gpio.h"
 #define LED_DURATION 100
 
 void RTC_Init(void)
@@ -19,7 +17,7 @@ void RTC_Init(void)
     RTC->CR &= ~RTC_CR_WUTE;
     RTC->ICSR = RTC_ICSR_INIT;
 
-    while (!(RTC->ICSR & RTC_ICSR_WUTWF) && !(RTC->ICSR & RTC_ICSR_INITF));
+    while (!(RTC->ICSR & RTC_ICSR_WUTWF) && !(RTC->ICSR & RTC_ICSR_INITF))
     
 
     RTC->CR |= RTC_CR_WUTIE;
@@ -29,7 +27,7 @@ void RTC_Init(void)
 
     RTC->ICSR &= ~ (RTC_ICSR_INIT | RTC_ICSR_INITF);
     
-    while ((RTC->ICSR & RTC_ICSR_INITF));
+    while ((RTC->ICSR & RTC_ICSR_INITF))
 
     NVIC_EnableIRQ(RTC_TAMP_IRQn);
 }

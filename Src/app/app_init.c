@@ -1,5 +1,6 @@
 #include "app_init.h"
 #include "app_config.h"
+#include "app_state.h"
 
 #include "board.h"
 #include "dma.h"
@@ -43,7 +44,7 @@ void APP_InitADCTransferDMA(void)
     DMA_SetDirection(ADC_Config.DMA_Channel,PERIPHERY_TO_MEMORY);
     DMA_SetArraySize(ADC_Config.DMA_Channel, BOARD_ADC_CHANNEL_QTY);
     DMA_SetPeripheryBaseAddr(ADC_Config.DMA_Channel, (uint32_t*)&ADC1->DR);
-    DMA_SetMemoryBaseAddr(ADC_Config.DMA_Channel, ADC_Data);
+    DMA_SetMemoryBaseAddr(ADC_Config.DMA_Channel, (uint32_t*)&ADC_Data);
     DMA_SetIncrementType(ADC_Config.DMA_Channel,DMA_INCREMENT_MEMORY);
     DMA_EnableCircularMode(ADC_Config.DMA_Channel);
 

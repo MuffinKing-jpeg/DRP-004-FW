@@ -49,9 +49,6 @@ typedef enum
     ADC_EXT_RISE_FALL,
 } ADC_ExtPolarity;
 
-
-static uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY] = {0};
-
 void ADC_RCC_Enable(void);
 void ADC_RCC_Disable(void);
 void ADC_Reset(void);

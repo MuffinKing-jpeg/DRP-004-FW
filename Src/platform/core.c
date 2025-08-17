@@ -27,7 +27,7 @@ void CORE_ClockInit(void)
 
 void CORE_EnterSTOP(void)
 {
-    RCC->CR |= (3UL << RCC_CR_HSIDIV_Pos);      // Slow down to 2MHz
+    RCC->CR |= 3UL << RCC_CR_HSIDIV_Pos;      // Slow down to 2MHz
     RCC->CFGR &= ~RCC_CFGR_PPRE;                // Keep APB at 2MHz
 
     PWR->CR1 |= PWR_CR1_LPR;                    // Enable LP regulator
@@ -44,7 +44,7 @@ void CORE_ExitSTOP(void)
     RCC->CFGR |= RCC_CFGR_PPRE;                 // Keep APB at 2MHz
 }
 
-void CORE_TickDelay(uint16_t ticks)
+void CORE_TickDelay(const uint16_t ticks)
 {
     for (uint16_t i = ticks; i > 0; i--);       // YOLO, LOL
 }

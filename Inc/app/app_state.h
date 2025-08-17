@@ -1,6 +1,8 @@
 #ifndef APP_STATE_H
 #define APP_STATE_H
+
 #include <stdint.h>
+#include "board.h"
 
 typedef enum
 {
@@ -14,6 +16,8 @@ typedef enum
     VALUE_OFF = 0x00,
     VALUE_ON = 0x01,
 } APP_ValueTypeDef;
+
+static uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY] = {0};
 
 void APP_State_Set(APP_StateTypeDef state);
 void APP_State_TickHandler(void);
