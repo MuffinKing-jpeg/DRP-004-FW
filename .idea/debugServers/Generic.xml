@@ -1,0 +1,14 @@
+<component name="DebugServers">
+  <generic-debug-target name="Generic" uniqueID="1405eb25-199e-45ef-b1ad-8f58b6905e61">
+    <debugger version="1">
+      <debugger kind="GDB" isBundled="true" />
+      <env />
+    </debugger>
+    <gdbserver exe="/usr/bin/JLinkGDBServerCLExe">
+      <env />
+    </gdbserver>
+    <console enabled="true" port="4444" />
+    <target reset-before="false" />
+    <connection custom-script="echo Connecting to target...\n&#10;$GDBTargetCommand$&#10;echo Connected to target!\n" warmup-ms="500" />
+  </generic-debug-target>
+</component>
