@@ -3,16 +3,6 @@
 
 #include "gpio.h"
 
-#ifdef BOARD_ADC_CHANNEL_QTY
-#undef BOARD_ADC_CHANNEL_QTY
-#endif
-#define BOARD_ADC_CHANNEL_QTY 2
-
-#define BOARD_ADC_BATT    ADC_CHANNEL_4
-#define BOARD_ADC_LDR     ADC_CHANNEL_15
-
-#define BOARD_ADC_CHANNEL_LIST (BOARD_ADC_BATT | BOARD_ADC_LDR)
-
 typedef struct
 {
     GPIO_PinTypeDef gpioPin;
