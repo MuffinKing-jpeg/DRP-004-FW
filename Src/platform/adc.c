@@ -54,7 +54,7 @@ void ADC_Calibration(void)
     else
     {
         ADC1->CR |= ADC_CR_ADCAL;
-        while (ADC1->CR & ADC_CR_ADCAL)
+        while (ADC1->CR & ADC_CR_ADCAL){}
         lastCalib = (uint8_t)ADC1->CALFACT;
     }
 }
@@ -62,7 +62,7 @@ void ADC_Calibration(void)
 void ADC_Enable(void)
 {
     ADC1->CR |= ADC_CR_ADEN;
-    while (!(ADC1->ISR & ADC_ISR_ADRDY));
+    while (!(ADC1->ISR & ADC_ISR_ADRDY)){}
 }
 
 void ADC_Start(void)
