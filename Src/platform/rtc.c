@@ -12,6 +12,10 @@ void RTC_Init(void)
     RCC->BDCR |= RCC_BDCR_RTCEN;
     RCC->BDCR |= RCC_BDCR_RTCSEL_1;
 
+    /* Magic bytes for unlocking RTC registers
+     * RM0444, section 30.3.8
+     */
+
     RTC->WPR = 0xCA;
     CORE_TickDelay(100);
     RTC->WPR = 0x53;
@@ -33,6 +37,9 @@ void RTC_Init(void)
     while (RTC->ICSR & RTC_ICSR_INITF){}
 
     NVIC_EnableIRQ(RTC_TAMP_IRQn);
+
+    // Wrong magick byte for locking RTC registers
+    RTC->WPR = 0xFF;
 }
 
 void RTC_ClearWUTF(void)
