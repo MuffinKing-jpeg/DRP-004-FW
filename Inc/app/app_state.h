@@ -20,7 +20,7 @@ typedef enum
 static uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY] = {0};
 
 void APP_State_Set(APP_StateTypeDef state);
-void APP_State_TickHandler(void);
+void APP_State_TickHandler();
 
 APP_StateTypeDef APP_State_Get(void);
 uint32_t APP_State_GetTick(void);
