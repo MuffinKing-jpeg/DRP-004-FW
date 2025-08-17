@@ -39,8 +39,8 @@ void APP_InitADCTransferDMA(void)
 {
 
     DMA_Init(ADC_Config.DMA_Channel);
-    DMA_SetPeripherySize(ADC_Config.DMA_Channel, DMA_SIZE_16);
-    DMA_SetMemorySize(ADC_Config.DMA_Channel, DMA_SIZE_16);
+    DMA_SetPeripherySize(ADC_Config.DMA_Channel, DMA_SIZE_32);
+    DMA_SetMemorySize(ADC_Config.DMA_Channel, DMA_SIZE_32);
     DMA_SetDirection(ADC_Config.DMA_Channel,PERIPHERY_TO_MEMORY);
     DMA_SetArraySize(ADC_Config.DMA_Channel, BOARD_ADC_CHANNEL_QTY);
     DMA_SetPeripheryBaseAddr(ADC_Config.DMA_Channel, (uint32_t*)&ADC1->DR);
