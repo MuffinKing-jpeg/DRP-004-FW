@@ -5,17 +5,18 @@
 #include "board.h"
 #include "gpio.h"
 
+struct TickDiff
+{
+    APP_ValueTypeDef current;
+    APP_ValueTypeDef last;
+};
+
 /* Defaults to idle on reset
  * TODO: make saving state to the flash
  */
 APP_StateTypeDef currentState = APP_STATE_IDLE;
 uint32_t currentTick = 0;
 
-struct TickDiff
-{
-    APP_ValueTypeDef current;
-    APP_ValueTypeDef last;
-};
 
 struct TickDiff isBtnPressed = {VALUE_OFF,VALUE_OFF};
 

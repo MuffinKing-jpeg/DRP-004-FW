@@ -22,7 +22,7 @@ void CORE_SetPA12Remap(void);
 void CORE_TickDelay(uint16_t ticks);
 
 #ifdef BUILD_DEBUG
-void CORE_AllowDebugInSTOP(void);
+void CORE_ConfigForDebugMode(void);
 #endif
 
 #endif

@@ -3,9 +3,6 @@
 
 #include "app_config.h"
 
-
-
-void APP_LDRInit(void);
 void APP_LDRStart(void);
 void APP_LDRStop(void);
 

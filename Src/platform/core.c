@@ -13,16 +13,11 @@ void CORE_ClockInit(void)
 {
     RCC->APBENR1 |= RCC_APBENR1_PWREN;
     RCC->APBENR2 |= RCC_APBENR2_SYSCFGEN;
-    RCC->APBENR1 |= RCC_APBENR1_TIM3EN;
 
     RCC->APBSMENR2 |= RCC_APBSMENR1_TIM3SMEN;
 
     RCC->CR &= ~RCC_CR_HSIDIV;
     RCC->CFGR |= RCC_CFGR_PPRE;
-
-    #ifdef BUILD_DEBUG
-    CORE_AllowDebugInSTOP();
-    #endif
 }
 
 void CORE_EnterSTOP(void)
@@ -54,10 +49,11 @@ void CORE_SetPA12Remap(void)
     SYSCFG->CFGR1 |= SYSCFG_CFGR1_PA12_RMP;
 }
 
-#ifdef BUILD_DEBUG
-void CORE_AllowDebugInSTOP(void)
+void CORE_ConfigForDebugMode(void)
 {
+#ifdef BUILD_DEBUG
     DBG->CR |= DBG_CR_DBG_STOP;
+    DBG->APBFZ2 |= DBG_APB_FZ2_DBG_TIM1_STOP;
+#endif
 }
 
-#endif

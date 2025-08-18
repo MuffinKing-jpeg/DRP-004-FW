@@ -16,7 +16,7 @@ const BOARD_GpioConfTypeDef BOARD_Servo_EN = {
     .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_OUTPUT,
     .gpioAF = GPIO_AF_NONE,
-    .gpioPull = GPIO_PULL_DOWN,
+    .gpioPull = GPIO_PULL_UP,
 };
 
 const BOARD_GpioConfTypeDef BOARD_LDR_ADC = {
@@ -128,6 +128,11 @@ void BOARD_Init(void)
 {
     CORE_ClockInit();
     CORE_PWRInit();
+
+#ifdef BUILD_DEBUG
+    CORE_ConfigForDebugMode();
+#endif
+
     GPIO_EnablePort(GPIO_PORT_B);
     GPIO_EnablePort(GPIO_PORT_A);
 
