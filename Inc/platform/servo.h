@@ -11,6 +11,9 @@ typedef enum
     TIM_CHANNEL_4 = 0x08,
 }TIM_ChannelTypeDef;
 
+void SERVO_TIMEnable(TIM_TypeDef *tim);
+void SERVO_TIMDisable(TIM_TypeDef *tim);
+
 void SERVO_TIMConfig(TIM_TypeDef *tim, TIM_ChannelTypeDef channel);
 void SERVO_SetAngle(TIM_TypeDef *tim, TIM_ChannelTypeDef channel, uint16_t angle);
 

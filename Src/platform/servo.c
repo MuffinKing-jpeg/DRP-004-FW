@@ -2,6 +2,63 @@
 
 uint8_t SERVO_CalibrationOffset = 0;
 
+void SERVO_TIMEnable(TIM_TypeDef* tim)
+{
+    switch ((uint32_t)tim)
+    {
+        case TIM1_BASE:
+        RCC->APBENR2 |= RCC_APBENR2_TIM1EN;
+        break;
+        case TIM2_BASE:
+        RCC->APBENR1 |= RCC_APBENR1_TIM2EN;
+        break;
+        case TIM3_BASE:
+        RCC->APBENR1 |= RCC_APBENR1_TIM3EN;
+        break;
+        case TIM14_BASE:
+        RCC->APBENR2 |= RCC_APBENR2_TIM14EN;
+        break;
+        case TIM16_BASE:
+        RCC->APBENR2 |= RCC_APBENR2_TIM16EN;
+        break;
+        case TIM17_BASE:
+        RCC->APBENR2 |= RCC_APBENR2_TIM17EN;
+        break;
+        default:
+        __NOP();
+        break;
+    }
+}
+
+void SERVO_TIMDisable(TIM_TypeDef* tim)
+{
+    switch ((uint32_t)tim)
+    {
+    case TIM1_BASE:
+        RCC->APBENR2 &= ~RCC_APBENR2_TIM1EN;
+        break;
+    case TIM2_BASE:
+        RCC->APBENR1 &= ~RCC_APBENR1_TIM2EN;
+        break;
+    case TIM3_BASE:
+        RCC->APBENR1 &= ~RCC_APBENR1_TIM3EN;
+        break;
+    case TIM14_BASE:
+        RCC->APBENR2 &= ~RCC_APBENR2_TIM14EN;
+        break;
+    case TIM16_BASE:
+        RCC->APBENR2 &= ~RCC_APBENR2_TIM16EN;
+        break;
+    case TIM17_BASE:
+        RCC->APBENR2 &= ~RCC_APBENR2_TIM17EN;
+        break;
+    default:
+        __NOP();
+        break;
+    }
+}
+
+
 void SERVO_TIMConfig(TIM_TypeDef *tim, const TIM_ChannelTypeDef channel)
 {
     tim->PSC = 0;
