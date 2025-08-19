@@ -53,6 +53,7 @@ set(sources_SRCS
         Src/app/app_init.c
         Src/app/app_power.c
         Src/app/app_state.c
+        Src/app/task_list.c
 )
 
 # Include directories for all compilers

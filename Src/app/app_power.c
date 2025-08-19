@@ -22,7 +22,7 @@ void APP_Power_CheckBatteryState(uint16_t battValue)
 {
 }
 
-void APP_Power_SetBatteryLoad(APP_ValueTypeDef value)
+void APP_Power_SetBatteryLoad(const APP_ValueTypeDef value)
 {
     switch (value)
     {
@@ -35,7 +35,7 @@ void APP_Power_SetBatteryLoad(APP_ValueTypeDef value)
     }
 }
 
-void APP_Power_SetLDR(APP_ValueTypeDef value)
+void APP_Power_SetLDR(const APP_ValueTypeDef value)
 {
     switch (value)
     {

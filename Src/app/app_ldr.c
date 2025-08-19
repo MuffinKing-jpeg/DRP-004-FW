@@ -1,21 +1,13 @@
 #include "app_ldr.h"
 
 #include "adc.h"
-#include "board.h"
 #include "tim1.h"
 #include "app_config.h"
+#include "core.h"
 #include "dma.h"
 
-void APP_LDRInit(void)
+void APP_LDRStart(void)
 {
-
-}
-void APP_LDRStart()
-{
-    // BRUH, again platform code
-#ifdef BUILD_DEBUG
-    DBG->APBFZ2 |= DBG_APB_FZ2_DBG_TIM1_STOP;
-#endif
     ADC_Start();
     DMA_EnableInterrupt(ADC_Config.DMA_Channel, DMA1_Channel1_IRQn);
     DMA_Enable(ADC_Config.DMA_Channel);
@@ -25,5 +17,7 @@ void APP_LDRStart()
 
 void APP_LDRStop(void)
 {
-    // TODO: HOW TO STOP LDR? LOL
+    ADC_Reset();
+    DMA_Disable(ADC_Config.DMA_Channel);
+    DMA_DisableInterrupt(ADC_Config.DMA_Channel, DMA1_Channel1_IRQn);
 }

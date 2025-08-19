@@ -1,8 +1,5 @@
-#ifndef __RTC_H
-#define __RTC_H
-
-#include "stm32g0xx.h"
-#include "core.h"
+#ifndef RTC_H
+#define RTC_H
 
 
 void RTC_Init(void);

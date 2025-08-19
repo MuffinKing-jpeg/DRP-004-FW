@@ -1,7 +1,8 @@
 #include "../../Inc/platform/rtc.h"
 
-#include "board.h"
-#include "gpio.h"
+#include "core.h"
+#include "stm32g031xx.h"
+
 #define LED_DURATION 100
 
 void RTC_Init(void)
@@ -11,6 +12,10 @@ void RTC_Init(void)
     RCC->BDCR |= RCC_BDCR_RTCEN;
     RCC->BDCR |= RCC_BDCR_RTCSEL_1;
 
+    /* Magic bytes for unlocking RTC registers
+     * RM0444, section 30.3.8
+     */
+
     RTC->WPR = 0xCA;
     CORE_TickDelay(100);
     RTC->WPR = 0x53;
@@ -19,7 +24,7 @@ void RTC_Init(void)
     RTC->CR &= ~RTC_CR_WUTE;
     RTC->ICSR = RTC_ICSR_INIT;
 
-    while (!(RTC->ICSR & RTC_ICSR_WUTWF) && !(RTC->ICSR & RTC_ICSR_INITF));
+    while (!(RTC->ICSR & RTC_ICSR_WUTWF) && !(RTC->ICSR & RTC_ICSR_INITF)){}
     
 
     RTC->CR |= RTC_CR_WUTIE;
@@ -29,9 +34,12 @@ void RTC_Init(void)
 
     RTC->ICSR &= ~ (RTC_ICSR_INIT | RTC_ICSR_INITF);
     
-    while ((RTC->ICSR & RTC_ICSR_INITF));
+    while (RTC->ICSR & RTC_ICSR_INITF){}
 
     NVIC_EnableIRQ(RTC_TAMP_IRQn);
+
+    // Wrong magick byte for locking RTC registers
+    RTC->WPR = 0xFF;
 }
 
 void RTC_ClearWUTF(void)

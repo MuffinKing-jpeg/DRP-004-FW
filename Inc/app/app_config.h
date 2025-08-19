@@ -2,10 +2,39 @@
 #define APP_CONFIG_H
 
 #include <stdint.h>
+
 #include "dma.h"
 #include "tim1.h"
 
 // #define USE_POWER_LATCH
+
+// Servo config
+
+#define CONFIG_SERVO_TIM                TIM3
+#define CONFIG_SERVO_TIM_CH             TIM_CHANNEL_2
+
+#define CONFIG_SERVO_START_BASE         180U
+#define CONFIG_SERVO_END_BASE           0U
+
+#define CONFIG_SERVO_ANGLE_INCREMENT    100U
+#define CONFIG_SERVO_START_ANGLE        (uint16_t)(CONFIG_SERVO_START_BASE * CONFIG_SERVO_ANGLE_INCREMENT)
+#define CONFIG_SERVO_END_ANGLE          (uint16_t)(CONFIG_SERVO_END_BASE  * CONFIG_SERVO_ANGLE_INCREMENT)
+
+#define CONFIG_SERVO_MOVE_DELAY         (uint32_t)400U
+
+// ADC config
+
+#ifdef CONFIG_BOARD_ADC_CHANNEL_QTY
+#undef CONFIG_BOARD_ADC_CHANNEL_QTY
+#endif
+#define CONFIG_BOARD_ADC_CHANNEL_QTY    2U
+
+#define CONFIG_BOARD_ADC_BATT           ADC_CHANNEL_4
+#define CONFIG_BOARD_ADC_LDR            ADC_CHANNEL_15
+
+#define CONFIG_BOARD_ADC_CHANNEL_LIST   (CONFIG_BOARD_ADC_BATT | CONFIG_BOARD_ADC_LDR)
+
+static uint32_t ADC_Data[CONFIG_BOARD_ADC_CHANNEL_QTY] = {0};
 
 typedef enum
 {
@@ -28,7 +57,7 @@ static const APP_ConfigTIMTrigger_TypeDef ADC_Config = {
 };
 
 static const TIM1_ConfigTypeDef TIM1_Config = {
-    .PSC = 0,
+    .PSC = 0x0080,
     .ARR = 0xFFFF,
     .CCR1 = 0,
     .CCR2 = 0,

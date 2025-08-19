@@ -1,5 +1,5 @@
-#ifndef __DMA_H
-#define __DMA_H
+#ifndef DMA_H
+#define DMA_H
 
 #include "stm32g0xx.h"
 

@@ -1,5 +1,5 @@
-#ifndef __TIM1_H
-#define __TIM1_H
+#ifndef TIM1_H
+#define TIM1_H
 
 #include "stm32g0xx.h"
 

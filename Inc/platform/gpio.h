@@ -1,5 +1,5 @@
-#ifndef __GPIO_H
-#define __GPIO_H
+#ifndef GPIO_H
+#define GPIO_H
 
 #include "stm32g0xx.h"
 
@@ -97,6 +97,6 @@ void GPIO_ResetPullDown(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 void GPIO_SetPullUp(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 void GPIO_ResetPullUp(GPIO_PortTypeDef port, GPIO_PinTypeDef pin);
 
-void GPIO_ApplyPull();
+void GPIO_ApplyPull(void);
 
 #endif

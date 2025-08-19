@@ -1,8 +1,6 @@
-#ifndef __ADC_H
-#define __ADC_H
+#ifndef ADC_H
+#define ADC_H
 
-#include "stm32g0xx.h"
-#include "board.h"
 
 typedef enum
 {
@@ -46,9 +44,6 @@ typedef enum
     ADC_EXT_FALL,
     ADC_EXT_RISE_FALL,
 } ADC_ExtPolarity;
-
-
-extern uint16_t ADC_Data[BOARD_ADC_CHANNEL_QTY];
 
 void ADC_RCC_Enable(void);
 void ADC_RCC_Disable(void);

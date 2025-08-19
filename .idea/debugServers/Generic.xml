@@ -1,0 +1,14 @@
+<component name="DebugServers">
+  <generic-debug-target name="Generic" uniqueID="1405eb25-199e-45ef-b1ad-8f58b6905e61" selected="true">
+    <debugger version="1">
+      <debugger kind="GDB" isBundled="true" />
+      <env />
+    </debugger>
+    <gdbserver exe="/usr/bin/JLinkGDBServer" args="-USB 0 -device STM32G031G6 -endian little -if SWD -speed 6000 -noir -LocalhostOnly -nologtofile -port 2331 -SWOPort 2332 -TelnetPort 2333" live-watches-enabled="true">
+      <env />
+    </gdbserver>
+    <console enabled="true" port="2331" />
+    <target reset-command="" reset-before="false" />
+    <connection extended-remote="false" remote-string="tcp::2331" custom-script="echo Connecting to target...\n&#10;$GDBTargetCommand$&#10;echo Connected to target!\n" warmup-ms="500" />
+  </generic-debug-target>
+</component>

@@ -4,6 +4,13 @@
 #include "app_power.h"
 #include "board.h"
 #include "gpio.h"
+#include "task_list.h"
+
+struct TickDiff
+{
+    APP_ValueTypeDef current;
+    APP_ValueTypeDef last;
+};
 
 /* Defaults to idle on reset
  * TODO: make saving state to the flash
@@ -11,11 +18,6 @@
 APP_StateTypeDef currentState = APP_STATE_IDLE;
 uint32_t currentTick = 0;
 
-struct TickDiff
-{
-    APP_ValueTypeDef current;
-    APP_ValueTypeDef last;
-};
 
 struct TickDiff isBtnPressed = {VALUE_OFF,VALUE_OFF};
 
@@ -60,11 +62,12 @@ void APP_State_Set(const APP_StateTypeDef state)
     }
 }
 
-void APP_State_TickHandler()
+void APP_State_TickHandler(void)
 {
     isBtnPressed.last = isBtnPressed.current;
     isBtnPressed.current = (APP_ValueTypeDef)GPIO_GetState(BOARD_ON_Detect.gpioPort, BOARD_ON_Detect.gpioPin);
 
+    APP_TASK_CheckTick(currentTick);
     // isBtnPressed inverted due to how button is implemented on hardware
     if (!isBtnPressed.current && isBtnPressed.last)
     {
