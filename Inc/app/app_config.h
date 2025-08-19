@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-#include "board.h"
 #include "dma.h"
 #include "tim1.h"
 
@@ -21,7 +20,7 @@
 #define CONFIG_SERVO_START_ANGLE        (uint16_t)(CONFIG_SERVO_START_BASE * CONFIG_SERVO_ANGLE_INCREMENT)
 #define CONFIG_SERVO_END_ANGLE          (uint16_t)(CONFIG_SERVO_END_BASE  * CONFIG_SERVO_ANGLE_INCREMENT)
 
-#define CONFIG_SERVO_OPEN_DELAY         1000U
+#define CONFIG_SERVO_MOVE_DELAY         (uint32_t)400U
 
 // ADC config
 

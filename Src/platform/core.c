@@ -54,6 +54,7 @@ void CORE_ConfigForDebugMode(void)
 #ifdef BUILD_DEBUG
     DBG->CR |= DBG_CR_DBG_STOP;
     DBG->APBFZ2 |= DBG_APB_FZ2_DBG_TIM1_STOP;
+    DBG->APBFZ1 |= DBG_APB_FZ1_DBG_RTC_STOP;
 #endif
 }
 

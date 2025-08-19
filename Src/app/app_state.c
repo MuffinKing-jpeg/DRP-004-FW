@@ -4,6 +4,7 @@
 #include "app_power.h"
 #include "board.h"
 #include "gpio.h"
+#include "task_list.h"
 
 struct TickDiff
 {
@@ -66,6 +67,7 @@ void APP_State_TickHandler(void)
     isBtnPressed.last = isBtnPressed.current;
     isBtnPressed.current = (APP_ValueTypeDef)GPIO_GetState(BOARD_ON_Detect.gpioPort, BOARD_ON_Detect.gpioPin);
 
+    APP_TASK_CheckTick(currentTick);
     // isBtnPressed inverted due to how button is implemented on hardware
     if (!isBtnPressed.current && isBtnPressed.last)
     {

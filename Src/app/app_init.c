@@ -14,7 +14,6 @@
 void APP_Init(void)
 {
     BOARD_Init();
-    RTC_Init();
     APP_InitSERVO();
 
     // Handling of saved state. For future use
@@ -24,13 +23,14 @@ void APP_Init(void)
         case APP_STATE_DROPPED:
         SERVO_SetAngle(CONFIG_SERVO_TIM, CONFIG_SERVO_TIM_CH, CONFIG_SERVO_START_ANGLE);
         APP_State_Set(APP_STATE_IDLE);
-        APP_TaskList.disableServo.targetTick = APP_State_GetTick() + CONFIG_SERVO_OPEN_DELAY;
+        APP_TASK_Defer(&TASK_DisableServo, CONFIG_SERVO_MOVE_DELAY);
         break;
         default:
         SERVO_SetAngle(CONFIG_SERVO_TIM, CONFIG_SERVO_TIM_CH, CONFIG_SERVO_END_ANGLE);
         GPIO_ResetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
         break;
     }
+    RTC_Init();
 }
 
 void APP_InitADCByTrigger(void)
