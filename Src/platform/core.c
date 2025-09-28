@@ -16,16 +16,16 @@ void CORE_ClockInit(void)
 
     RCC->APBSMENR2 |= RCC_APBSMENR1_TIM3SMEN;
 
-    RCC->CR &= ~RCC_CR_HSIDIV;
-    RCC->CFGR |= RCC_CFGR_PPRE;
+    RCC->CR |= RCC_CR_HSIDIV_1 | RCC_CR_HSIDIV_0;
+    RCC->CFGR &= ~RCC_CFGR_PPRE_Msk;
 }
 
 void CORE_EnterSTOP(void)
 {
-    RCC->CR |= 3UL << RCC_CR_HSIDIV_Pos;      // Slow down to 2MHz
-    RCC->CFGR &= ~RCC_CFGR_PPRE;                // Keep APB at 2MHz
+    // RCC->CR |= RCC_CR_HSIDIV_1 | RCC_CR_HSIDIV_0;       // Slow down to 2MHz
+    // RCC->CFGR &= ~RCC_CFGR_PPRE_Msk;                    // Keep APB at 2MHz
 
-    PWR->CR1 |= PWR_CR1_LPR;                    // Enable LP regulator
+    PWR->CR1 |= PWR_CR1_LPR;                                // Enable LP regulator
     PWR->CR1 &= ~PWR_CR1_LPMS;
     CORE_TickDelay(100);
     __WFI();
@@ -33,10 +33,10 @@ void CORE_EnterSTOP(void)
 
 void CORE_ExitSTOP(void)
 {
-    PWR->CR1 &= ~PWR_CR1_LPR;                   // Disable LP regulator
+    PWR->CR1 &= ~PWR_CR1_LPR;                               // Disable LP regulator
     CORE_TickDelay(100);
-    RCC->CR &= ~RCC_CR_HSIDIV;                  // Speed-up to 16MHz
-    RCC->CFGR |= RCC_CFGR_PPRE;                 // Keep APB at 2MHz
+    // RCC->CR &= ~RCC_CR_HSIDIV;                  // Speed-up to 16MHz
+    // RCC->CFGR |= RCC_CFGR_PPRE_2 | RCC_CFGR_PPRE_1 | RCC_CFGR_PPRE_0;     // Keep APB at 2MHz
 }
 
 void CORE_TickDelay(const uint16_t ticks)
