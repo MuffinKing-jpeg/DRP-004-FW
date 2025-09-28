@@ -6,6 +6,7 @@
 struct APP_TaskTypeDef
 {
     uint32_t targetTick;
+    uint8_t isActive;
     void (* const fn)(void);
 };
 

@@ -27,14 +27,14 @@ struct APP_TaskTypeDef *taskArray[] = {
 
 void APP_TASK_Execute(struct APP_TaskTypeDef* task)
 {
-    task->targetTick = 0;
+    task->isActive = 0;
     task->fn();
 }
 
 void APP_TASK_CheckTick(const uint32_t tick)
 {
     for (uint8_t i = 0; i < TASK_COUNT; i++) {
-        if (taskArray[i]->targetTick <= tick && taskArray[i]->targetTick != 0) {
+        if (taskArray[i]->targetTick == tick && taskArray[i]->isActive != 0) {
             APP_TASK_Execute(taskArray[i]);
         }
     }
@@ -42,4 +42,5 @@ void APP_TASK_CheckTick(const uint32_t tick)
 void APP_TASK_Defer(struct APP_TaskTypeDef* task, const uint32_t delayTicks)
 {
     task->targetTick = delayTicks + APP_State_GetTick();
+    task->isActive = 1;
 }
