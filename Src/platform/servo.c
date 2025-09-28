@@ -1,6 +1,6 @@
-#include "../../Inc/platform/servo.h"
+#include "servo.h"
 
-uint8_t SERVO_CalibrationOffset = 0;
+#include "app_config.h"
 
 void SERVO_TIMEnable(TIM_TypeDef* tim)
 {
@@ -61,8 +61,8 @@ void SERVO_TIMDisable(TIM_TypeDef* tim)
 
 void SERVO_TIMConfig(TIM_TypeDef *tim, const TIM_ChannelTypeDef channel)
 {
-    tim->PSC = 0;
-    tim->ARR = 40000 - 1;
+    tim->PSC = CONFIG_SERVO_TIM_PSC;
+    tim->ARR = CONFIG_SERVO_TIM_ARR;
 
     for (uint8_t i = 0; i < 4; i++)
     {
@@ -91,7 +91,7 @@ void SERVO_TIMConfig(TIM_TypeDef *tim, const TIM_ChannelTypeDef channel)
 
 void SERVO_SetAngle(TIM_TypeDef *tim, const TIM_ChannelTypeDef channel, const uint16_t angle)
 {
-    const uint16_t mapped_angle = 2500 + angle * 2500 / 18000 - SERVO_CalibrationOffset; // Some mapping shenanigans. Numbers picked by experiment.
+    const uint16_t mapped_angle = CONFIG_SERVO_MIN_BASE + CONFIG_SERVO_MAP_SLOPE * (angle - CONFIG_SERVO_MIN_ANGLE); // Some mapping shenanigans. Numbers picked by experiment.
     volatile uint32_t* channels[] = {&tim->CCR1,&tim->CCR2,&tim->CCR3,&tim->CCR4};
 
     for (uint8_t i = 0; i < 4; i++)
