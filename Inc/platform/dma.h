@@ -44,4 +44,6 @@ void DMA_Disable(DMA_Channel_TypeDef* DMA_Channel);
 void DMA_EnableInterrupt(DMA_Channel_TypeDef* DMA_Channel, IRQn_Type IRQn);
 void DMA_DisableInterrupt(DMA_Channel_TypeDef* DMA_Channel, IRQn_Type IRQn);
 
+void DMA_ClearInterruptFlags(void);
+
 #endif

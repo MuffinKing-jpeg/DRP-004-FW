@@ -19,6 +19,7 @@
 #include <stdint.h>
 #include "main.h"
 #include "app_init.h"
+#include "app_state.h"
 
 int main(void)
 {
@@ -28,6 +29,7 @@ int main(void)
     /* Loop forever */
     while (1)
     {
+        APP_State_TickHandler();
         CORE_EnterSTOP();
     }
 }

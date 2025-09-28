@@ -7,10 +7,13 @@
 
 #define TASK_COUNT (uint8_t)(sizeof(taskArray) / sizeof(taskArray[0]))
 
-static void disableServo(void)
+void disableServo(void)
 {
-    SERVO_TIMDisable(CONFIG_SERVO_TIM);
-    GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
+    if (APP_State_Get() != APP_STATE_ARMED)
+    {
+        SERVO_TIMDisable(CONFIG_SERVO_TIM);
+        GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
+    }
 }
 
 struct APP_TaskTypeDef TASK_DisableServo = {

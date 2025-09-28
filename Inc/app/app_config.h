@@ -24,17 +24,30 @@
 
 // ADC config
 
-#ifdef CONFIG_BOARD_ADC_CHANNEL_QTY
-#undef CONFIG_BOARD_ADC_CHANNEL_QTY
-#endif
-#define CONFIG_BOARD_ADC_CHANNEL_QTY    2U
-
+#define CONFIG_BOARD_ADC_CHANNEL_QTY    sizeof(ADC_Data)/sizeof(uint32_t)
 #define CONFIG_BOARD_ADC_BATT           ADC_CHANNEL_4
 #define CONFIG_BOARD_ADC_LDR            ADC_CHANNEL_15
 
 #define CONFIG_BOARD_ADC_CHANNEL_LIST   (CONFIG_BOARD_ADC_BATT | CONFIG_BOARD_ADC_LDR)
 
-static uint32_t ADC_Data[CONFIG_BOARD_ADC_CHANNEL_QTY] = {0};
+
+struct ADC_DMA_BufferTypeDef
+{
+    uint32_t data_batt;
+    uint32_t data_ldr;
+};
+
+extern volatile struct ADC_DMA_BufferTypeDef ADC_Data;
+
+// LDR Config
+#define CONFIG_LDR_THRESHOLD            2750.0f
+/* EMA (exponential moving average)
+ * S = S * CONFIG_LDR_EMA_FILTER_COEF_INV + data * CONFIG_LDR_EMA_FILTER_COEF
+ */
+#define CONFIG_LDR_EMA_FILTER_COEF      0.9f
+#define CONFIG_LDR_EMA_FILTER_COEF_INV  (1.0f - CONFIG_LDR_EMA_FILTER_COEF)
+
+
 
 typedef enum
 {
@@ -52,7 +65,7 @@ typedef struct
 
 static const APP_ConfigTIMTrigger_TypeDef ADC_Config = {
     .TIM_ARR = 0xFFFF,
-    .TIM_PSC = 0,
+    .TIM_PSC = 0x0000,
     .DMA_Channel = DMA1_Channel1,
 };
 

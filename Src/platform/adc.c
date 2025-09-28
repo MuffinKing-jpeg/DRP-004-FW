@@ -78,7 +78,7 @@ void ADC_SetExternalTriggerPolarity(const ADC_ExtPolarity polarity)
 
 void ADC_EnableWaitMode(void)
 {
-    ADC1->CFGR1 |= ADC_CFGR1_SCANDIR;
+    // ADC1->CFGR1 |= ADC_CFGR1_SCANDIR; // IDK why i used it here.
     ADC1->CFGR1 |= ADC_CFGR1_WAIT;
 }
 

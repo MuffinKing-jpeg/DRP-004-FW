@@ -26,8 +26,7 @@ void APP_Init(void)
         APP_TASK_Defer(&TASK_DisableServo, CONFIG_SERVO_MOVE_DELAY);
         break;
         default:
-        SERVO_SetAngle(CONFIG_SERVO_TIM, CONFIG_SERVO_TIM_CH, CONFIG_SERVO_END_ANGLE);
-        GPIO_ResetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
+        APP_State_Set(APP_STATE_ARMED);
         break;
     }
     RTC_Init();
