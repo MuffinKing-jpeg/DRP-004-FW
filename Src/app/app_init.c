@@ -1,5 +1,6 @@
 #include "app_init.h"
 #include "app_config.h"
+#include "app_config_types.h"
 #include "app_state.h"
 #include "task_list.h"
 
@@ -10,6 +11,22 @@
 #include "servo.h"
 #include "tim1.h"
 #include "adc.h"
+
+
+const APP_ConfigTIMTrigger_TypeDef ADC_Config = {
+    .DMA_Channel = DMA1_Channel1,
+};
+
+const TIM1_ConfigTypeDef TIM1_Config = {
+    .PSC = CONFIG_TIM1_PSC ,
+    .ARR = CONFIG_TIM1_ARR ,
+    .CCR1 = CONFIG_TIM1_CCR1 ,
+    .CCR2 = CONFIG_TIM1_CCR2 ,
+    .CCR3 = CONFIG_TIM1_CCR3 ,
+    .CCR4 = CONFIG_TIM1_CCR4 ,
+    .CCR5 = CONFIG_TIM1_CCR5 ,
+    .CCR6 = CONFIG_TIM1_CCR6 ,
+};
 
 void APP_Init(void)
 {
@@ -42,7 +59,7 @@ void APP_InitADCByTrigger(void)
     ADC_SetChannel(CONFIG_BOARD_ADC_CHANNEL_LIST);
     ADC_EnableCircularDMA();
     ADC_EnableWaitMode();
-    TIM1_Init(&TIM1_Config);
+    TIM1_InitConfig(&TIM1_Config);
     TIM1_EnableChannel(TIM1_CHANNEL_5);
     TIM1_TRGO2_Config(TIM_MMS2_UPDATE);
 }

@@ -3,13 +3,24 @@
 #include "adc.h"
 #include "tim1.h"
 #include "app_config.h"
-#include "core.h"
+#include "app_config_types.h"
+#include "app_state.h"
 #include "dma.h"
 
 uint8_t newDataFlag = 0;
 float lastData = 0;
 
 volatile struct ADC_DMA_BufferTypeDef ADC_Data = {0};
+
+void APP_LDR_CheckThreshold(void)
+{
+    if (lastData >= CONFIG_LDR_THRESHOLD)
+    {
+        lastData = 0;
+        newDataFlag = 0;
+        APP_State_Set(APP_STATE_DROPPED);
+    }
+}
 
 void APP_LDR_TickHandler(void)
 {
@@ -20,14 +31,7 @@ void APP_LDR_TickHandler(void)
     }
 }
 
-APP_LDR_ThresholdReachedTypeDef APP_LDR_CheckThreshold(void)
-{
-    if (lastData >= CONFIG_LDR_THRESHOLD)
-    {
-        return APP_LDR_THRESHOLD_REACHED;
-    }
-    return APP_LDR_THRESHOLD_NOT_REACHED;
-}
+
 
 void APP_LDR_InterruptHandler(void)
 {

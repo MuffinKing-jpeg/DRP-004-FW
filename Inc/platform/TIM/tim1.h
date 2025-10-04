@@ -61,7 +61,7 @@ void TIM1_DisableChannel(TIM1_CHANNEL channel);
 void TIM1_SetOCMode(TIM1_CHANNEL channel, TIM1_OC_ModeTypeDef mode);
 
 
-void TIM1_Init(const TIM1_ConfigTypeDef* TIM_ConfigStruct);
+void TIM1_InitConfig(const TIM1_ConfigTypeDef* TIM_ConfigStruct);
 void TIM1_Start(void);
 
 

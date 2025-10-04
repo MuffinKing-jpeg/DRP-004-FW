@@ -48,6 +48,8 @@ void setStateArmed(void)
 void setStateDropped(void)
 {
     SERVO_SetAngle(CONFIG_SERVO_TIM, CONFIG_SERVO_TIM_CH, CONFIG_SERVO_START_ANGLE);
+    APP_TASK_Defer(&TASK_DisableServo, CONFIG_SERVO_MOVE_DELAY);
+    APP_LDRStop();
     currentState = APP_STATE_DROPPED;
 }
 
@@ -90,11 +92,7 @@ void APP_State_TickHandler(void)
     if (currentState == APP_STATE_ARMED)
     {
         APP_LDR_TickHandler();
-        if (APP_LDR_CheckThreshold())
-        {
-            setStateDropped();
-            APP_TASK_Defer(&TASK_DisableServo, CONFIG_SERVO_MOVE_DELAY);
-        }
+        APP_LDR_CheckThreshold();
     }
 }
 
