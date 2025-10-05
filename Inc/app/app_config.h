@@ -13,11 +13,11 @@
 #define CONFIG_SERVO_TIM                TIM3
 #define CONFIG_SERVO_TIM_CH             TIM_CHANNEL_2
 
-#define CONFIG_SERVO_TIM_PSC            4
-#define CONFIG_SERVO_TIM_ARR            (8000-1)
+#define CONFIG_SERVO_TIM_PSC            1
+#define CONFIG_SERVO_TIM_ARR            (20000-1)
 
-#define CONFIG_SERVO_MIN_BASE           200
-#define CONFIG_SERVO_MAX_BASE           1000
+#define CONFIG_SERVO_MIN_BASE           500
+#define CONFIG_SERVO_MAX_BASE           2500
 
 #define CONFIG_SERVO_MIN_ANGLE          0
 #define CONFIG_SERVO_MAX_ANGLE          180
