@@ -6,6 +6,9 @@
 void APP_LDRStart(void);
 void APP_LDRStop(void);
 
-void LDR_Handler(APP_ConfigTIMTrigger_TypeDef* LDR_Config);
+void APP_LDR_TickHandler(void);
+void APP_LDR_InterruptHandler(void);
+
+void APP_LDR_CheckThreshold(void);
 
 #endif

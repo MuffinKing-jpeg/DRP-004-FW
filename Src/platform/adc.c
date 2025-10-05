@@ -7,6 +7,7 @@ void ADC_RCC_Enable(void)
 {
     RCC->APBENR2 |= RCC_APBENR2_ADCEN;
     RCC->APBSMENR2 |= RCC_APBSMENR2_ADCSMEN;
+    RCC->CCIPR |= RCC_CCIPR_ADCSEL_1;
     ADC1->CR |= ADC_CR_ADVREGEN;
     CORE_TickDelay(1000);
 }
@@ -78,7 +79,7 @@ void ADC_SetExternalTriggerPolarity(const ADC_ExtPolarity polarity)
 
 void ADC_EnableWaitMode(void)
 {
-    ADC1->CFGR1 |= ADC_CFGR1_SCANDIR;
+    // ADC1->CFGR1 |= ADC_CFGR1_SCANDIR; // IDK why i used it here.
     ADC1->CFGR1 |= ADC_CFGR1_WAIT;
 }
 

@@ -6,7 +6,7 @@ void TIM1_Enable(void)
     RCC->APBSMENR2 |= RCC_APBSMENR2_TIM1SMEN;
 }
 
-void TIM1_Init(const TIM1_ConfigTypeDef* TIM_ConfigStruct)
+void TIM1_InitConfig(const TIM1_ConfigTypeDef* TIM_ConfigStruct)
 {
     TIM1->ARR = TIM_ConfigStruct->ARR;
     TIM1->PSC = TIM_ConfigStruct->PSC;

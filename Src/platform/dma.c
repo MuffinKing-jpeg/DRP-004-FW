@@ -55,6 +55,11 @@ void DMA_SetIncrementType(DMA_Channel_TypeDef* DMA_Channel,const DMA_IncrementTy
     }
 }
 
+void DMA_ClearInterruptFlags(void)
+{
+    DMA1->IFCR |= DMA_IFCR_CGIF1;
+}
+
 void DMA_SetArraySize(DMA_Channel_TypeDef* DMA_Channel, const uint32_t Size)
 {
     DMA_Channel->CNDTR = Size;

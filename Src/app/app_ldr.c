@@ -3,8 +3,40 @@
 #include "adc.h"
 #include "tim1.h"
 #include "app_config.h"
-#include "core.h"
+#include "app_config_types.h"
+#include "app_state.h"
 #include "dma.h"
+
+uint8_t newDataFlag = 0;
+float lastData = 0;
+
+volatile struct ADC_DMA_BufferTypeDef ADC_Data = {0};
+
+void APP_LDR_CheckThreshold(void)
+{
+    if (lastData >= CONFIG_LDR_THRESHOLD)
+    {
+        lastData = 0;
+        newDataFlag = 0;
+        APP_State_Set(APP_STATE_DROPPED);
+    }
+}
+
+void APP_LDR_TickHandler(void)
+{
+    if (newDataFlag >= 1)
+    {
+        lastData = lastData * CONFIG_LDR_EMA_FILTER_COEF_INV + (float)ADC_Data.data_ldr * CONFIG_LDR_EMA_FILTER_COEF;
+        newDataFlag = 0;
+    }
+}
+
+
+
+void APP_LDR_InterruptHandler(void)
+{
+    newDataFlag = 1;
+}
 
 void APP_LDRStart(void)
 {

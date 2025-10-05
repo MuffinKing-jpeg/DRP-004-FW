@@ -26,6 +26,7 @@ void setStateIdle(void)
     APP_Power_SetConverterMode(APP_POWER_CONVERTER_MODE_PWM);
     APP_LDRStop();
     GPIO_ResetPin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
+    APP_TASK_Defer(&TASK_DisableServo, CONFIG_SERVO_MOVE_DELAY);
     currentState = APP_STATE_IDLE;
 }
 
@@ -38,11 +39,17 @@ void setStateArmed(void)
     APP_InitADCTransferDMA();
     APP_LDRStart();
     GPIO_SetPin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
+    SERVO_TIMEnable(CONFIG_SERVO_TIM);
+    SERVO_SetAngle(CONFIG_SERVO_TIM, CONFIG_SERVO_TIM_CH, CONFIG_SERVO_END_ANGLE);
+    GPIO_ResetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
     currentState = APP_STATE_ARMED;
 }
 
 void setStateDropped(void)
 {
+    SERVO_SetAngle(CONFIG_SERVO_TIM, CONFIG_SERVO_TIM_CH, CONFIG_SERVO_START_ANGLE);
+    APP_TASK_Defer(&TASK_DisableServo, CONFIG_SERVO_MOVE_DELAY);
+    APP_LDRStop();
     currentState = APP_STATE_DROPPED;
 }
 
@@ -81,7 +88,12 @@ void APP_State_TickHandler(void)
             setStateIdle();
         }
     }
-    currentTick++;
+
+    if (currentState == APP_STATE_ARMED)
+    {
+        APP_LDR_TickHandler();
+        APP_LDR_CheckThreshold();
+    }
 }
 
 APP_StateTypeDef APP_State_Get(void)
@@ -92,4 +104,9 @@ APP_StateTypeDef APP_State_Get(void)
 uint32_t APP_State_GetTick(void)
 {
     return currentTick;
+}
+
+void APP_State_RTCHandler(void)
+{
+    currentTick++;
 }

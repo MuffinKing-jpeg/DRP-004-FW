@@ -18,6 +18,7 @@ typedef enum
 
 void APP_State_Set(APP_StateTypeDef state);
 void APP_State_TickHandler(void);
+void APP_State_RTCHandler(void);
 
 APP_StateTypeDef APP_State_Get(void);
 uint32_t APP_State_GetTick(void);
