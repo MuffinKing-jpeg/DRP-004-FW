@@ -80,7 +80,8 @@ void SERVO_TIMConfig(TIM_TypeDef* tim, const TIM_ChannelTypeDef channel)
                 tim->CCMR2 |= 6UL << (4 + 8 * (i - 2));
                 tim->CCMR2 |= 1UL << (8 + 8 * (i - 2));
             }
-            tim->CCER |= 1UL << 4 * i;
+            tim->CCER |= 1UL << (4 * i);
+            tim->CCER |= 1UL << (4 * i + 1);
 
             tim->BDTR |= TIM_BDTR_MOE;
             tim->CR1 |= TIM_CR1_CEN;

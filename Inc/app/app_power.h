@@ -15,15 +15,8 @@ typedef enum
     APP_POWER_BATTERY_DEAD = 0x02,
 } APP_BatteryStatusTypeDef;
 
-typedef enum
-{
-    APP_POWER_CONVERTER_MODE_PWM = 0x00,
-    APP_POWER_CONVERTER_MODE_PFM = 0x01,
-} APP_PowerConverterModeTypeDef;
-
 void APP_Power_CheckBatteryState(uint16_t battValue);
-
-void APP_Power_SetConverterMode(APP_PowerConverterModeTypeDef mode);
+void APP_Power_SetServoPower(APP_ValueTypeDef value);
 void APP_Power_SetBatteryLoad(APP_ValueTypeDef value);
 void APP_Power_SetLDR(APP_ValueTypeDef value);
 #endif //APP_POWER_H

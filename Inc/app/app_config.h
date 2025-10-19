@@ -33,7 +33,7 @@
 
 #define CONFIG_BOARD_ADC_CHANNEL_QTY    sizeof(ADC_Data)/sizeof(uint32_t)
 #define CONFIG_BOARD_ADC_BATT           ADC_CHANNEL_4
-#define CONFIG_BOARD_ADC_LDR            ADC_CHANNEL_15
+#define CONFIG_BOARD_ADC_LDR            ADC_CHANNEL_16
 
 #define CONFIG_BOARD_ADC_CHANNEL_LIST   (CONFIG_BOARD_ADC_BATT | CONFIG_BOARD_ADC_LDR)
 
@@ -50,7 +50,7 @@
 
 // LDR Config
 // Probably I should store threshold inside flash for calibration purposes
-#define CONFIG_LDR_THRESHOLD            2750.0f
+#define CONFIG_LDR_THRESHOLD            1750.0f
 /* EMA (exponential moving average)
  * S = S * CONFIG_LDR_EMA_FILTER_COEF_INV + data * CONFIG_LDR_EMA_FILTER_COEF
  */

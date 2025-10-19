@@ -20,7 +20,7 @@ const BOARD_GpioConfTypeDef BOARD_Servo_EN = {
 };
 
 const BOARD_GpioConfTypeDef BOARD_LDR_ADC = {
-    .gpioPin = GPIO_PIN11,
+    .gpioPin = GPIO_PIN12,
     .gpioPort = GPIO_PORT_A,
     .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_RST,
@@ -29,7 +29,7 @@ const BOARD_GpioConfTypeDef BOARD_LDR_ADC = {
 };
 
 const BOARD_GpioConfTypeDef BOARD_LDR_EN = {
-    .gpioPin = GPIO_PIN12,
+    .gpioPin = GPIO_PIN11,
     .gpioPort = GPIO_PORT_A,
     .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_OUTPUT,
@@ -38,7 +38,7 @@ const BOARD_GpioConfTypeDef BOARD_LDR_EN = {
 };
 
 const BOARD_GpioConfTypeDef BOARD_BAT_load = {
-    .gpioPin = GPIO_PIN5,
+    .gpioPin = GPIO_PIN8,
     .gpioPort = GPIO_PORT_A,
     .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_OUTPUT,
@@ -54,18 +54,18 @@ const BOARD_GpioConfTypeDef BOARD_BAT_ADC = {
     .gpioAF = GPIO_AF_NONE,
     .gpioPull = GPIO_PULL_NONE,
 };
-
-const BOARD_GpioConfTypeDef BOARD_DCMode_SW = {
-    .gpioPin = GPIO_PIN0,
-    .gpioPort = GPIO_PORT_A,
-    .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
-    .gpioMode = GPIO_MODE_OUTPUT,
-    .gpioAF = GPIO_AF_NONE,
-    .gpioPull = GPIO_PULL_NONE,
-};
+// Removed in v3 hardware
+// const BOARD_GpioConfTypeDef BOARD_DCMode_SW = {
+//     .gpioPin = GPIO_PIN0,
+//     .gpioPort = GPIO_PORT_A,
+//     .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
+//     .gpioMode = GPIO_MODE_OUTPUT,
+//     .gpioAF = GPIO_AF_NONE,
+//     .gpioPull = GPIO_PULL_NONE,
+// };
 
 const BOARD_GpioConfTypeDef BOARD_PMIC_CHRG = {
-    .gpioPin = GPIO_PIN0,
+    .gpioPin = GPIO_PIN1,
     .gpioPort = GPIO_PORT_B,
     .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_INPUT,
@@ -74,7 +74,7 @@ const BOARD_GpioConfTypeDef BOARD_PMIC_CHRG = {
 };
 
 const BOARD_GpioConfTypeDef BOARD_PMIC_PG = {
-    .gpioPin = GPIO_PIN1,
+    .gpioPin = GPIO_PIN2,
     .gpioPort = GPIO_PORT_B,
     .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
     .gpioMode = GPIO_MODE_INPUT,
@@ -103,7 +103,7 @@ const BOARD_GpioConfTypeDef BOARD_ON_LATCH = {
 const BOARD_GpioConfTypeDef BOARD_ON_Detect = {
     .gpioPin = GPIO_PIN2,
     .gpioPort = GPIO_PORT_A,
-    .gpioOpMode = GPIO_OP_MODE_PUSHPULL,
+    .gpioOpMode = GPIO_OP_MODE_OPENDRAIN,
     .gpioMode = GPIO_MODE_INPUT,
     .gpioAF = GPIO_AF_NONE,
     .gpioPull = GPIO_PULL_DOWN
@@ -116,7 +116,6 @@ BOARD_GpioConfTypeDef BOARD_PinConfig[] = {
     BOARD_LDR_EN,
     BOARD_BAT_load,
     BOARD_BAT_ADC,
-    BOARD_DCMode_SW,
     BOARD_PMIC_CHRG,
     BOARD_PMIC_PG,
     BOARD_LED,

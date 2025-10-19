@@ -2,6 +2,7 @@
 
 #include "app_state.h"
 #include "app_config.h"
+#include "app_power.h"
 
 #include "board.h"
 
@@ -12,7 +13,7 @@ void disableServo(void)
     if (APP_State_Get() != APP_STATE_ARMED)
     {
         SERVO_TIMDisable(CONFIG_SERVO_TIM);
-        GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
+        APP_Power_SetServoPower(VALUE_OFF);
     }
 }
 

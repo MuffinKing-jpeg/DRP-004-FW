@@ -5,16 +5,14 @@
 APP_ValueTypeDef isLDRPowered   = VALUE_OFF;
 APP_ValueTypeDef isBatteryLoaded = VALUE_OFF;
 
-void APP_Power_SetConverterMode(const APP_PowerConverterModeTypeDef mode)
+void APP_Power_SetServoPower(const APP_ValueTypeDef value)
 {
-    switch (mode)
+    if (value == VALUE_OFF)
     {
-    case APP_POWER_CONVERTER_MODE_PWM:
-        GPIO_ResetPin(BOARD_DCMode_SW.gpioPort, BOARD_DCMode_SW.gpioPin);
-        break;
-    case APP_POWER_CONVERTER_MODE_PFM:
-        GPIO_SetPin(BOARD_DCMode_SW.gpioPort, BOARD_DCMode_SW.gpioPin);
-        break;
+        GPIO_ResetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
+    } else
+    {
+        GPIO_SetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
     }
 }
 

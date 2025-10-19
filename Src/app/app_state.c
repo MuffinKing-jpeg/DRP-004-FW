@@ -23,7 +23,6 @@ struct TickDiff isBtnPressed = {VALUE_OFF,VALUE_OFF};
 
 void setStateIdle(void)
 {
-    APP_Power_SetConverterMode(APP_POWER_CONVERTER_MODE_PWM);
     APP_LDRStop();
     GPIO_ResetPin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
     APP_TASK_Defer(&TASK_DisableServo, CONFIG_SERVO_MOVE_DELAY);
@@ -32,7 +31,6 @@ void setStateIdle(void)
 
 void setStateArmed(void)
 {
-    APP_Power_SetConverterMode(APP_POWER_CONVERTER_MODE_PFM);
     APP_Power_SetBatteryLoad(VALUE_ON);
     APP_Power_SetLDR(VALUE_ON);
     APP_InitADCByTrigger();
@@ -41,7 +39,7 @@ void setStateArmed(void)
     GPIO_SetPin(BOARD_LED.gpioPort, BOARD_LED.gpioPin);
     SERVO_TIMEnable(CONFIG_SERVO_TIM);
     SERVO_SetAngle(CONFIG_SERVO_TIM, CONFIG_SERVO_TIM_CH, CONFIG_SERVO_END_ANGLE);
-    GPIO_ResetPin(BOARD_Servo_EN.gpioPort, BOARD_Servo_EN.gpioPin);
+    APP_Power_SetServoPower(VALUE_ON);
     currentState = APP_STATE_ARMED;
 }
 
